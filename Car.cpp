@@ -5,7 +5,7 @@ using namespace std;
 
 
 
-int Car::Ñalc() const
+int Car::Calc() const
 {
 	int a;
 	if (this->fulerType == gasoline)
@@ -19,8 +19,8 @@ int Car::Ñalc() const
 
 bool Car::operator>(const Car& car2) const
 {
-	int a = car2.Ñalc();
-	if (this->Ñalc() > a)
+	int a = car2.Calc();
+	if (this->Calc() > a)
 		return true;
 	else
 		return false;

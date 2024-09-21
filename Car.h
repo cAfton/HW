@@ -30,7 +30,7 @@ public:
 		this->sitCount = 0;
 		this->tankVolume = 0;
 	}// Конструктор за замовчуванням
-	int Сalc() const;
+	int Calc() const;
 	bool operator>(const Car& car2) const;
 
 };
