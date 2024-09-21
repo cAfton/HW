@@ -8,5 +8,5 @@ private:
 	//enum
 	int sitCount;//кі-сть мість
 	int tankVolume;//об'єм бака
-
+public:
 };
