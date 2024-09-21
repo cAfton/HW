@@ -1,10 +1,11 @@
 #include <iostream>
-#include "Car.h"
+#include "CoffeMachine.h"
 
 using namespace std;
 
 int main()
 {
+<<<<<<< HEAD
 	Car car2(50, 1500, 6, gasoline, 4, 300);
 	Car car1 = {};
 	if (car1 > car2) {//чи потужніша машина 1 за машину 2
@@ -12,4 +13,17 @@ int main()
 	}
 	else
 		cout << "The second machine is more powerful than the first";
+=======
+	CoffeeMachine coffeeMachine(true, 200, 500, 500, 250);
+
+	coffeeMachine.createCoffee(Latte);
+	coffeeMachine.createCoffee(Capuchino);
+	coffeeMachine.createCoffee(Americano);
+	coffeeMachine.Refill(300, 0, 0);
+	coffeeMachine.createCoffee(Americano_with_milk);
+	coffeeMachine.createCoffee(Glace);
+	coffeeMachine.createCoffee(Espresso);
+	coffeeMachine.PrintLeft();
+
+>>>>>>> ea5ae5bfee2bf90297f6b98b660685234dedc138
 }

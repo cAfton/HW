@@ -129,9 +129,10 @@
   <ItemGroup>
     <ClCompile Include="2109_1.cpp" />
     <ClCompile Include="Car.cpp" />
+    <ClCompile Include="CoffeMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Car.h" />
+    <ClInclude Include="CoffeMachine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
