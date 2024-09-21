@@ -1,12 +1,31 @@
 ﻿#pragma once
 
-class Car {
+using namespace std;
+
+enum CoffeeModes {
+	Latte,
+	Capuchino,
+	Americano,
+	Americano_with_milk,
+	Glace,
+	Espresso
+};
+
+class CoffeeMachine {
 private:
-	double engineVolume;//об'єм двигуна
-	int weight;//маса
-	int pistonCount;//поршні
-	//enum
-	int sitCount;//кі-сть мість
-	int tankVolume;//об'єм бака
+	CoffeeModes coffeeMode;
+	int modeCount;
+	bool capuchinator;
+	double coffeeCount;
+	double milkCount;
+	double waterCount;
+	double sizeOfCup;
+public:
+	CoffeeMachine(bool capuchinator, double coffeeCount, double milkCount, double waterCount, double sizeOfCup) : modeCount(6), capuchinator(capuchinator), coffeeCount(coffeeCount), milkCount(milkCount), waterCount(waterCount), sizeOfCup(sizeOfCup){}
+	CoffeeMachine() : modeCount(6), capuchinator(false), coffeeCount(0), milkCount(0), waterCount(0){}
+
+	void PrintLeft();
+	void Refill(double coffee, double water, double milk);
+	void createCoffee(CoffeeModes coffeeMode);
 
 };
