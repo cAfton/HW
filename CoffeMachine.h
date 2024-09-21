@@ -22,7 +22,7 @@ private:
 	double sizeOfCup;
 public:
 	CoffeeMachine(bool capuchinator, double coffeeCount, double milkCount, double waterCount, double sizeOfCup) : modeCount(6), capuchinator(capuchinator), coffeeCount(coffeeCount), milkCount(milkCount), waterCount(waterCount), sizeOfCup(sizeOfCup){}
-	CoffeeMachine() : modeCount(6), capuchinator(false), coffeeCount(0), milkCount(0), waterCount(0){}
+	CoffeeMachine(): modeCount(6), capuchinator(false), coffeeCount(0), milkCount(0), waterCount(0), sizeOfCup(0){}
 
 	void PrintLeft();
 	void Refill(double coffee, double water, double milk);

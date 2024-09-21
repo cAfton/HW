@@ -11,7 +11,7 @@ int main()
 	coffeeMachine.createCoffee(Latte);
 	coffeeMachine.createCoffee(Capuchino);
 	coffeeMachine.createCoffee(Americano);
-	coffeeMachine.PrintLeft();
+	//coffeeMachine.PrintLeft();
 	coffeeMachine.createCoffee(Americano_with_milk);
 	coffeeMachine.createCoffee(Glace);
 	coffeeMachine.createCoffee(Espresso);

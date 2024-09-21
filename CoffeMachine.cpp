@@ -25,7 +25,7 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 		{
 			this->coffeeCount -= (sizeOfCup * (1 / 4));
 			this->milkCount -= (sizeOfCup * (3 / 4));
-
+			cout << "Done" << endl;
 		}
 		else {
 			cout << "refill coffee machine" << endl;
@@ -36,6 +36,8 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 		{
 			this->coffeeCount -= (sizeOfCup * (1 / 4));
 			this->milkCount -= (sizeOfCup * (3 / 4));
+			cout << "Done" << endl;
+
 		}
 		else {
 			cout << "refill coffee machine" << endl;
@@ -46,6 +48,8 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 		{
 			this->waterCount -= (sizeOfCup * (3 / 4));
 			this->coffeeCount -= (sizeOfCup * (1 / 4));
+			cout << "Done" << endl;
+
 		}
 		else {
 			cout << "refill coffee machine" << endl;
@@ -57,6 +61,8 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 			this->waterCount -= (sizeOfCup * (2 / 4));
 			this->coffeeCount -= (sizeOfCup * (1 / 4));
 			this->milkCount -= (sizeOfCup * (1 / 4));
+			cout << "Done" << endl;
+
 		}
 		else {
 			cout << "refill coffee machine" << endl;
@@ -66,6 +72,8 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 		if (coffeeCount >= sizeOfCup * (2 / 3))
 		{
 			this->coffeeCount -= (sizeOfCup * (2 / 3));
+			cout << "Done" << endl;
+
 		}
 		else {
 			cout << "refill coffee machine" << endl;
@@ -75,6 +83,8 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 		if (this->coffeeCount >= sizeOfCup * (1 / 4))
 		{
 			this->coffeeCount -= (sizeOfCup * (1 / 4));
+			cout << "Done" << endl;
+
 		}
 		else {
 			cout << "refill coffee machine" << endl;
