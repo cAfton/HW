@@ -21,10 +21,10 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 	switch (coffeeMode)
 	{
 	case Latte:
-		if (this->coffeeCount >= sizeOfCup * (1 / 4) && this->milkCount >= sizeOfCup * (3 / 4))
+		if (this->coffeeCount >= sizeOfCup * (1. / 4.) && this->milkCount >= sizeOfCup * (3. / 4.))
 		{
-			this->coffeeCount -= (sizeOfCup * (1 / 4));
-			this->milkCount -= (sizeOfCup * (3 / 4));
+			this->coffeeCount -= (sizeOfCup * (1. / 4.));
+			this->milkCount -= (sizeOfCup * (3. / 4.));
 			cout << "Done" << endl;
 		}
 		else {
@@ -32,10 +32,10 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 		}
 		break;
 	case Capuchino:
-		if (capuchinator && this->coffeeCount >= sizeOfCup * (1 / 4) && this->milkCount >= sizeOfCup * (3 / 4))
+		if (capuchinator && this->coffeeCount >= sizeOfCup * (1. / 4.) && this->milkCount >= sizeOfCup * (3. / 4.))
 		{
-			this->coffeeCount -= (sizeOfCup * (1 / 4));
-			this->milkCount -= (sizeOfCup * (3 / 4));
+			this->coffeeCount -= (sizeOfCup * (1. / 4.));
+			this->milkCount -= (sizeOfCup * (3. / 4.));
 			cout << "Done" << endl;
 
 		}
@@ -44,10 +44,10 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 		}
 		break;
 	case Americano:
-		if (this->waterCount >= sizeOfCup * (3 / 4) && this->coffeeCount >= sizeOfCup * (1 / 4))
+		if (this->waterCount >= sizeOfCup * (3. / 4.) && this->coffeeCount >= sizeOfCup * (1. / 4.))
 		{
-			this->waterCount -= (sizeOfCup * (3 / 4));
-			this->coffeeCount -= (sizeOfCup * (1 / 4));
+			this->waterCount -= (sizeOfCup * (3. / 4.));
+			this->coffeeCount -= (sizeOfCup * (1. / 4.));
 			cout << "Done" << endl;
 
 		}
@@ -56,11 +56,11 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 		}
 		break;
 	case Americano_with_milk:
-		if (this->waterCount >= sizeOfCup * (2 / 4) && this->coffeeCount >= sizeOfCup * (1 / 4) && this->milkCount >= sizeOfCup * (1 / 4))
+		if (this->waterCount >= sizeOfCup * (2. / 4.) && this->coffeeCount >= sizeOfCup * (1. / 4.) && this->milkCount >= sizeOfCup * (1. / 4.))
 		{
-			this->waterCount -= (sizeOfCup * (2 / 4));
-			this->coffeeCount -= (sizeOfCup * (1 / 4));
-			this->milkCount -= (sizeOfCup * (1 / 4));
+			this->waterCount -= (sizeOfCup * (2. / 4.));
+			this->coffeeCount -= (sizeOfCup * (1. / 4.));
+			this->milkCount -= (sizeOfCup * (1. / 4.));
 			cout << "Done" << endl;
 
 		}
@@ -69,9 +69,9 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 		}
 		break;
 	case Glace:
-		if (coffeeCount >= sizeOfCup * (2 / 3))
+		if (coffeeCount >= sizeOfCup * (2. / 3.))
 		{
-			this->coffeeCount -= (sizeOfCup * (2 / 3));
+			this->coffeeCount -= (sizeOfCup * (2. / 3.));
 			cout << "Done" << endl;
 
 		}
@@ -80,9 +80,9 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 		}
 		break;
 	case Espresso:
-		if (this->coffeeCount >= sizeOfCup * (1 / 4))
+		if (this->coffeeCount >= sizeOfCup * (1. / 4.))
 		{
-			this->coffeeCount -= (sizeOfCup * (1 / 4));
+			this->coffeeCount -= (sizeOfCup * (1. / 4.));
 			cout << "Done" << endl;
 
 		}
