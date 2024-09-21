@@ -3,11 +3,6 @@
 using namespace std;
 
 
-void CoffeeMachine::PrintLeft()
-{
-	cout << "Coffee: " << this->coffeeCount << "\nMilk: " << this->milkCount << "\nWater: " << this->waterCount << "\nCapuchinator: " << (this->capuchinator ? "avalible\n" : "not avalible\n");
-}
-
 void CoffeeMachine::Refill(double coffee, double milk, double water)
 {
 	this->coffeeCount += coffee;
@@ -94,4 +89,10 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 	default:
 		break;
 	}
+}
+
+ostream& operator<<(ostream& out, const CoffeeMachine machine)
+{
+	out << "Coffee: " << machine.coffeeCount << "\nMilk: " << machine.milkCount << "\nWater: " << machine.waterCount << "\nCapuchinator: " << (machine.capuchinator ? "avalible\n" : "not avalible\n");
+	return out;
 }
