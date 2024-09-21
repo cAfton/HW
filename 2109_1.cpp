@@ -13,7 +13,7 @@ int main()
 	}
 	else
 		cout << "The second machine is more powerful than the first";
-	if (car1 < car2) {//чи потужніша машина 1 за машину 2
+	if (car2 < car1) {//чи потужніша машина 1 за машину 2
 		cout << "\nThe first car is more powerful than the second";
 	}
 	else
