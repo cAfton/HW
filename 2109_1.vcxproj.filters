@@ -18,6 +18,7 @@
     <ClCompile Include="2109_1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Car.cpp">
     <ClCompile Include="CoffeMachine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
