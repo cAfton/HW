@@ -13,6 +13,12 @@ int main()
 	}
 	else
 		cout << "The second machine is more powerful than the first";
+	if (car1 < car2) {//чи потужніша машина 1 за машину 2
+		cout << "\nThe first car is more powerful than the second";
+	}
+	else
+		cout << "\nThe second machine is more powerful than the first";
+	cout << endl;
 	CoffeeMachine coffeeMachine(true, 200, 500, 500, 250);
 
 	coffeeMachine.createCoffee(Latte);

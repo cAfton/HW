@@ -25,3 +25,11 @@ bool Car::operator>(const Car& car2) const
 	else
 		return false;
 }
+bool Car::operator<(const Car& car2) const
+{
+	int a = car2.Calc();
+	if (this->Calc() < a)
+		return true;
+	else
+		return false;
+}

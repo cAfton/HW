@@ -33,4 +33,5 @@ public:
 	int Calc() const;
 	bool operator>(const Car& car2) const;
 
+	bool operator<(const Car& car2) const;
 };
