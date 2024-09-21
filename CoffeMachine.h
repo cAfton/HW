@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <iostream>
 
 using namespace std;
 
@@ -27,6 +28,6 @@ public:
 	void Refill(double coffee, double water, double milk);
 	void createCoffee(CoffeeModes coffeeMode);
 
-	friend ostream& operator<<(ostream& out, const CoffeeMachine machine);
+	friend std::ostream& operator<<(std::ostream& out, const CoffeeMachine machine);
 
 };

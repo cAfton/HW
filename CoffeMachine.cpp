@@ -1,5 +1,5 @@
 #include "CoffeMachine.h"
-#include <iostream>
+
 using namespace std;
 
 
@@ -91,8 +91,8 @@ void CoffeeMachine::createCoffee(CoffeeModes coffeeMode)
 	}
 }
 
-ostream& operator<<(ostream& out, const CoffeeMachine machine)
+std::ostream& operator<<(std::ostream& out, const CoffeeMachine machine)
 {
-	out << "Coffee: " << machine.coffeeCount << "\nMilk: " << machine.milkCount << "\nWater: " << machine.waterCount << "\nCapuchinator: " << (machine.capuchinator ? "avalible\n" : "not avalible\n");
+	out << "Coffee: " << machine.coffeeCount << "\nMilk: " << machine.milkCount << "\nWater: " << machine.waterCount << "\nCapuchinator: " << (machine.capuchinator ? "avalible" : "not avalible");
 	return out;
 }

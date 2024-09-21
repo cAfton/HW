@@ -28,6 +28,6 @@ int main()
 	coffeeMachine.createCoffee(Americano_with_milk);
 	coffeeMachine.createCoffee(Glace);
 	coffeeMachine.createCoffee(Espresso);
-	coffeeMachine.PrintLeft();
 
+	cout << coffeeMachine << endl;
 }
