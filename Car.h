@@ -16,6 +16,21 @@ private:
 	int sitCount;//кі-сть мість
 	int tankVolume;//об'єм бака
 public:
-	int calc();
+	Car(double engineVolume1, int weight1, int pistonCount1, FulerType fulerType1, int sitCount1, int tankVolume1) :engineVolume(engineVolume1),
+		weight(weight1),
+		fulerType(fulerType1),
+		sitCount(sitCount1),
+		pistonCount(pistonCount1),
+		tankVolume(tankVolume1){}//конструктор 
+	Car() {
+		this->engineVolume = 0;
+		this->weight = 0;
+		this->pistonCount = 0;
+		this->fulerType = alternative;
+		this->sitCount = 0;
+		this->tankVolume = 0;
+	}// Конструктор за замовчуванням
+	int Сalc() const;
+	bool operator>(const Car& car2) const;
 
 };
