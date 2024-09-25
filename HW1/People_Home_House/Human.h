@@ -13,6 +13,9 @@ private:
     int age;
 public:
 
+    Human();
+    Human(string name, string surname, string fatherly, int age);
+
     string Name();
     string Surname();
     string Fatherly();
