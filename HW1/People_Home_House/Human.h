@@ -16,13 +16,6 @@ public:
     Human();
     Human(string name, string surname, string fatherly, int age);
 
-    string Name();
-    string Surname();
-    string Fatherly();
-    int Age();
-
-    void Name(string setName);
-    void Surname(string setSurame);
-    void Fatherly(string setFatherly);
-    void Age(int setAge);
+    friend istream& operator>>(istream& in, Human& human);
+    friend ostream& operator<<(ostream& out, const Human human);
 };

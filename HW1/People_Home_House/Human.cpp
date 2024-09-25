@@ -16,43 +16,23 @@ Human::Human(string name, string surname, string fatherly, int age)
     this->age = age;
 }
 
-string Human::Name()
+
+istream& operator>>(istream& in, Human& human)
 {
-    return this->name;
+    cout << "Name: ";
+    in >> human.name;
+    cout << "\nSurname: ";
+    in >> human.surname;
+    cout << "\nFatherly: ";
+    in >> human.fatherly;
+    cout << "\nAge: ";
+    in >> human.age;
+
+    return in;
 }
 
-string Human::Surname()
+ostream& operator<<(ostream& out, const Human human)
 {
-    return this->surname;
+    out << "Name: " << human.name << "\nSurname: " << human.surname << "\nFatherly: " << human.fatherly << "\nAge: " << human.age;
+    return out;
 }
-
-string Human::Fatherly()
-{
-    return this->fatherly;
-}
-
-int Human::Age()
-{
-    return this->age;
-}
-
-void Human::Name(string setName)
-{
-    this->name = setName;
-}
-
-void Human::Surname(string setSurname)
-{
-    this->surname = setSurname;
-}
-
-void Human::Fatherly(string setFatherly)
-{
-    this->fatherly = setFatherly;
-}
-
-void Human::Age(int setAge)
-{
-    this->age = setAge;
-}
-
