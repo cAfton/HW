@@ -1,7 +1,9 @@
 #include "Human.h"
+#include "Flat.h"
 
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	Flat flat1;
+	Human human1;
 }

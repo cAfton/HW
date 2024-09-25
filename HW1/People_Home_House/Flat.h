@@ -10,4 +10,7 @@ private:
 	int bathrooms;
 public:
 
+	Flat();
+	Flat(Human* people, int rooms, double area, int bedrooms, int bathrooms);
+	~Flat();
 };
