@@ -17,5 +17,5 @@ public:
     Human(string name, string surname, string fatherly, int age);
 
     friend istream& operator>>(istream& in, Human& human);
-    friend ostream& operator<<(ostream& out, const Human human);
+    friend ostream& operator<<(ostream& out, const Human& human);
 };

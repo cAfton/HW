@@ -2,6 +2,7 @@
 
 Human::Human()
 {
+
     this->name = "no_name";
     this->surname = "no_surname";
     this->fatherly = "no_fatherly";
@@ -31,7 +32,7 @@ istream& operator>>(istream& in, Human& human)
     return in;
 }
 
-ostream& operator<<(ostream& out, const Human human)
+ostream& operator<<(ostream& out, const Human& human)
 {
     out << "Name: " << human.name << "\nSurname: " << human.surname << "\nFatherly: " << human.fatherly << "\nAge: " << human.age;
     return out;
