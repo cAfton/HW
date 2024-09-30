@@ -1,5 +1,19 @@
 #include "Date.h"
 
+Date::Date()
+{
+	this->day = 1;
+	this->month = 1;
+	this->year = 1970;
+}
+
+Date::Date(int day, int month, int year)
+{
+	this->day = day;
+	this->month = month;
+	this->year = year;
+}
+
 int Date::Day()
 {
     return this->day;
