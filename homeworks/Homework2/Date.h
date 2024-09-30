@@ -40,4 +40,7 @@ public:
 	void operator--(int post);
 	void operator--();
 
+	Date operator+(Date date);
+	Date operator-(Date date);
+
 };
