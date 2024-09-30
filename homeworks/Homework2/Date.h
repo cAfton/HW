@@ -20,153 +20,24 @@ public:
 		this->year = year;
 	}
 
-	int Day() {
-		return this->day;
-	}
-	int Month() {
-		return this->month;
-	}
-	int Year() {
-		return this->year;
-	}
+	int Day();
+	int Month();
+	int Year();
 
-	void Day(int day) {
-		this->day = day;
-	}
-	void Month(int month) {
-		this->month = month;
-	}
-	void Year(int year) {
-		this->year = year;
-	}
+	void Day(int day);
+	void Month(int month);
+	void Year(int year);
 
-	void addDay() {
-		switch (this->month)
-		{
-		case 1:
-			if (this->day == 31)
-			{
-				this->day = 1;
-				this->month++;
-			}
-			else {
-				this->day++;
-			}
-			break;
-		case 2:
-			if (this->day == 28)
-			{
-				this->day = 1;
-				this->month++;
-			}
-			else {
-				this->day++;
-			}
-			break;
-		case 3:
-			if (this->day == 31)
-			{
-				this->day = 1;
-				this->month++;
-			}
-			else {
-				this->day++;
-			}
-			break;
-		case 4:
-			if (this->day == 30)
-			{
-				this->day = 1;
-				this->month++;
-			}
-			else {
-				this->day++;
-			}
-			break;
-		case 5:
-			if (this->day == 31)
-			{
-				this->day = 1;
-				this->month++;
-			}
-			else {
-				this->day++;
-			}
-			break;
-		case 6:
-			if (this->day == 30)
-			{
-				this->day = 1;
-				this->month++;
-			}
-			else {
-				this->day++;
-			}
-			break;
-		case 7:
-			if (this->day == 31)
-			{
-				this->day = 1;
-				this->month++;
-			}
-			else {
-				this->day++;
-			}
-			break;
-		case 8:
-			if (this->day == 31)
-			{
-				this->day = 1;
-				this->month++;
-			}
-			else {
-				this->day++;
-			}
-			break;
-		case 9:
-			if (this->day == 30)
-			{
-				this->day = 1;
-				this->month++;
-			}
-			else {
-				this->day++;
-			}
-			break;
-		case 10:
-			if (this->day == 31)
-			{
-				this->day = 1;
-				this->month++;
-			}
-			else {
-				this->day++;
-			}
-			break;
-		case 11:
-			if (this->day == 30)
-			{
-				this->day = 1;
-				this->month++;
-			}
-			else {
-				this->day++;
-			}
-			break;
-		case 12:
-			if (this->day == 31)
-			{
-				this->day = 1;
-				this->month = 1;
-				this->year++;
-			}
-			else {
-				this->day++;
-			}
-			break;
-		default:
-			cout << "month went over" << endl;
-			break;
-		}
-	}
+	void addDay();
+	void minusDay();
+
+	friend ostream& operator<<(ostream& out, const Date& date);
+	friend ifstream& operator>>(ifstream& in, Date& date);
+
+	void operator++(int post);
+	void operator++();
+
+	void operator--(int post);
+	void operator--();
+
 };
