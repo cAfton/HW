@@ -16,32 +16,32 @@ Date::Date(int day, int month, int year)
 
 int Date::Day()
 {
-    return this->day;
+	return this->day;
 }
 
 int Date::Month()
 {
-    return this->month;
+	return this->month;
 }
 
 int Date::Year()
 {
-    return this->year;
+	return this->year;
 }
 
 void Date::Day(int day)
 {
-    this->day = day;
+	this->day = day;
 }
 
 void Date::Month(int month)
 {
-    this->month = month;
+	this->month = month;
 }
 
 void Date::Year(int year)
 {
-    this->year = year;
+	this->year = year;
 }
 
 void Date::addDay() {
@@ -233,6 +233,26 @@ void Date::minusDay()
 	}
 	else {
 		this->day--;
+	}
+}
+
+void Date::sort()
+{
+	if (Day() > 31) {
+		Month(Month() + (Day() / 31));
+		Day(Day() % 31);
+	}
+	if (Month() > 12) {
+		Year(Year() + (Month() / 12));
+		Month(Month() % 12);
+	}
+	if (Day() < 1) {
+		Month(Month() - 1);
+		Day(31 + Day());
+	}
+	if (Month() < 1) {
+		Year(Year() - 1);
+		Month(12 + Month());
 	}
 }
 
@@ -512,8 +532,6 @@ Date Date::operator-(Date date)
 	return ret;
 }
 
-
-
 ostream& operator<<(ostream& out, const Date& date)
 {
 	out << date.day << "/" << date.month << "/" << date.year;
@@ -524,31 +542,78 @@ ifstream& operator>>(ifstream& in, Date& date)
 {
 	return in;
 }
+///////////////
 
-////////////
-
-//Date Date::operator!=(Date& date)
-//{
-//	if (Day() != date.day)
-//		return Day();
-//	else if (Month() != date.month)
-//		return Day();
-//	else if (Year() != date.year)
-//		return Day();
-//	else
-//		return date.day;
-//}
-//
-//
-//Date Date::operator==(Date& date)
-//{
-//	if (Day() == date.day)
-//		return Day();
-//	else if (Month() == date.month)
-//		return Day();
-//	else if (Year() == date.year)
-//		return Day();
-//	else
-//		return date.day;
+bool Date::operator!=(const Date& date) const {
+	return day != date.day || month != date.month || year != date.year;
 }
+
+bool Date::operator==(const Date& date) const {
+	return day == date.day && month == date.month && year == date.year;
+}
+
+
+bool Date::operator>(const Date& date) const {
+	if (year > date.year)
+		return true;
+	else if (year == date.year && month > date.month)
+		return true;
+	else if (month == date.month && day > date.day)
+		return true;
+	else
+		return false;
+}
+
+bool Date::operator<(const Date& date) const {
+	if (year < date.year)
+		return true;
+	else if (year == date.year && month < date.month)
+		return true;
+	else if (month == date.month && day < date.day)
+		return true;
+	else
+		return false;
+}
+
+
+bool Date::operator>=(const Date& date) const {
+	return year >= date.year || (year >= date.year && month >= date.month) || (year >= date.year && month >= date.month && day >= date.day);
+}
+bool Date::operator<=(const Date& date) const {
+	return year <= date.year || (year <= date.year && month <= date.month) || (year <= date.year && month <= date.month && day <= date.day);
+}
+
+
+void Date::operator=(const Date& date)
+{
+	Year(date.year);
+	Month(date.month);
+	Day(date.day);
+}
+
+
+void Date::operator+=(const Date& date)
+{
+	Year(Year() + date.year);
+	Month(Month() + date.month);
+	Day(Day() + date.day);
+	sort();
+}
+
+void Date::operator-=(const Date& date)
+{
+	Year(Year() - date.year);
+	Month(Month() - date.month);
+	Day(Day() - date.day);
+	sort();
+}
+
+void Date::operator()(int y, int m, int d)
+{
+	year = y;
+	month = m;
+	day = d;
+	sort();
+}
+
 

@@ -23,6 +23,8 @@ public:
 	void addDay();
 	void minusDay();
 
+	void sort();
+
 	friend ostream& operator<<(ostream& out, const Date& date);
 	friend ifstream& operator>>(ifstream& in, Date& date);
 
@@ -34,11 +36,20 @@ public:
 
 	Date operator+(Date date);
 	Date operator-(Date date);
-	//Nazar
-	/*
-	Date operator!=(Date& date);
-	Date operator==(Date& date);
-*/
 
+	bool operator!=(const Date& date) const;
+	bool operator==(const Date& date) const;
 
+	bool operator>(const Date& date) const;
+	bool operator<(const Date& date) const;
+
+	bool operator>=(const Date& date) const;
+	bool operator<=(const Date& date) const;
+
+	void operator=(const Date& date);
+
+	void operator+=(const Date& date);
+	void operator-=(const Date& date);
+
+	void operator()(int y, int m, int d);
 };
