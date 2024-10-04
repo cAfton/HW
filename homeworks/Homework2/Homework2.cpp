@@ -26,4 +26,12 @@ int main()
     cout << date1 + date2 << endl;
 
     cout << date1 - date2 << endl;
+
+    //D1 = date1 != date2;
+    //D2 = date1 == date2;
+
+    /*
+    cout << date1 != date2 << endl;
+
+    cout << date1 == date2 << endl;*/
 }

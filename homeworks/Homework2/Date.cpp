@@ -527,28 +527,28 @@ ifstream& operator>>(ifstream& in, Date& date)
 
 ////////////
 
-void Date::operator!=(Date date)
-{
-	if (Day() != date.day)
-		return true;
-	else if (Month() != date.month)
-		return true;
-	else if (Year() != date.year)
-		return true;
-	else
-		return false;
-}
-
-
-void Date::operator==(Date date)
-{
-	if (Day() == date.day)
-		return true;
-	else if (Month() == date.month)
-		return true;
-	else if (Year() == date.year)
-		return true;
-	else
-		return false;
+//Date Date::operator!=(Date& date)
+//{
+//	if (Day() != date.day)
+//		return Day();
+//	else if (Month() != date.month)
+//		return Day();
+//	else if (Year() != date.year)
+//		return Day();
+//	else
+//		return date.day;
+//}
+//
+//
+//Date Date::operator==(Date& date)
+//{
+//	if (Day() == date.day)
+//		return Day();
+//	else if (Month() == date.month)
+//		return Day();
+//	else if (Year() == date.year)
+//		return Day();
+//	else
+//		return date.day;
 }
 
