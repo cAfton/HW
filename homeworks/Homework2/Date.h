@@ -34,5 +34,11 @@ public:
 
 	Date operator+(Date date);
 	Date operator-(Date date);
+	//Nazar
+	
+	void operator!=(Date date);
+	void operator==(Date date);
+
+
 
 };

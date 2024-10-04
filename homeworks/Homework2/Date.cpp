@@ -512,6 +512,8 @@ Date Date::operator-(Date date)
 	return ret;
 }
 
+
+
 ostream& operator<<(ostream& out, const Date& date)
 {
 	out << date.day << "/" << date.month << "/" << date.year;
@@ -522,3 +524,31 @@ ifstream& operator>>(ifstream& in, Date& date)
 {
 	return in;
 }
+
+////////////
+
+void Date::operator!=(Date date)
+{
+	if (Day() != date.day)
+		return true;
+	else if (Month() != date.month)
+		return true;
+	else if (Year() != date.year)
+		return true;
+	else
+		return false;
+}
+
+
+void Date::operator==(Date date)
+{
+	if (Day() == date.day)
+		return true;
+	else if (Month() == date.month)
+		return true;
+	else if (Year() == date.year)
+		return true;
+	else
+		return false;
+}
+
