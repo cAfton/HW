@@ -52,7 +52,7 @@ public:
                         temp->next = new Node(elem, nullptr);
                     }
                 }
-                Node insert(elem, temp->next);
+                Node* insert = new Node(elem, temp->next);
                 temp->next = &insert;
             }
             else {
