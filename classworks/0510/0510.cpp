@@ -27,7 +27,7 @@ private:
         {
             return true;
         }
-        cout << "index over masive" << endl;
+        cout << "index over macive" << endl;
         return false;
     }
 public:
