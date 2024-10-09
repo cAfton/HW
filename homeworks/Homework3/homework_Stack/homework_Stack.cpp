@@ -37,9 +37,9 @@ public:
     }
 
     T pop() {
-        if (lengh != 0)
+        if (this->lengh != 0)
         {
-            lengh--;
+            this->lengh--;
             T temp = arr[lengh];
             return temp;
         }
@@ -47,9 +47,31 @@ public:
     }
 
     T peek() {
-        return arr[lengh - 1];
+        if (this->lengh != 0)
+        {
+            return arr[lengh - 1];
+        }
+    }
+    bool isEmptyStack() {
+        if (lengh == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    ~Stack() {
+        delete[] arr;
     }
 };
+
+bool check(char first, char second){
+    if ((first == '(' && second == ')') || (first == '[' && second == ']') || (first == '{' && second == '}') || (first == '<' && second == '>'))
+    {
+        return true;
+    }
+    return false;
+}
 
 int main()
 {
@@ -57,8 +79,9 @@ int main()
     string text;
     
     getline(cin, text);
+    int i = 0;
 
-    for (size_t i = 0; i < text.size(); i++)
+    for (size_t i = 0; text[i] != ';'; i++)
     {
         cout << text[i];
         if (text[i] == '(' || text[i] == '[' || text[i] == '{' || text[i] == '<')
@@ -68,16 +91,24 @@ int main()
 
         if (text[i] == ')' || text[i] == ']' || text[i] == '}' || text[i] == '>')
         {
-            cout << "  !!! " << stack.peek() << " !!!   ";
-            if (stack.peek() != text[i])
+            if (check(stack.peek(), text[i]))
             {
-                cout << "<-- here is error" << endl;
-                break;
+                stack.pop();
+                
             }
             else {
-                stack.pop();
+                cout << "<-- here is error" << endl;
+                return 1;
             }
         }
+    }
+    cout << endl;
+    if (stack.isEmptyStack())
+    {
+        cout << "everything is correct" << endl;
+    }
+    else {
+        cout << "you forgot to close brackets" << endl;
     }
 
 }
