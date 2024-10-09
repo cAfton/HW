@@ -7,21 +7,13 @@ int main()
 
     cout << date1 << endl;
 
-    date1++;
+    cout << date1++ << endl;
 
-    cout << date1 << endl;
+    cout << ++date1 << endl;
 
-    ++date1;
+    cout << date1-- << endl;
 
-    cout << date1 << endl;
-
-    date1--;
-
-    cout << date1 << endl;
-
-    --date1;
-
-    cout << date1 << endl;
+    cout << --date1 << endl;
 
     cout << date1 + date2 << endl;
 

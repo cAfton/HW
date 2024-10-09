@@ -44,99 +44,14 @@ void Date::Year(int year)
 	this->year = year;
 }
 
-void Date::addDay() {
+Date Date::addDay() {
 	switch (this->month)
 	{
 	case 1:
-		if (this->day == 31)
-		{
-			this->day = 1;
-			this->month++;
-		}
-		else {
-			this->day++;
-		}
-		break;
-	case 2:
-		if (this->day == 28)
-		{
-			this->day = 1;
-			this->month++;
-		}
-		else {
-			this->day++;
-		}
-		break;
 	case 3:
-		if (this->day == 31)
-		{
-			this->day = 1;
-			this->month++;
-		}
-		else {
-			this->day++;
-		}
-		break;
-	case 4:
-		if (this->day == 30)
-		{
-			this->day = 1;
-			this->month++;
-		}
-		else {
-			this->day++;
-		}
-		break;
 	case 5:
-		if (this->day == 31)
-		{
-			this->day = 1;
-			this->month++;
-		}
-		else {
-			this->day++;
-		}
-		break;
-	case 6:
-		if (this->day == 30)
-		{
-			this->day = 1;
-			this->month++;
-		}
-		else {
-			this->day++;
-		}
-		break;
 	case 7:
-		if (this->day == 31)
-		{
-			this->day = 1;
-			this->month++;
-		}
-		else {
-			this->day++;
-		}
-		break;
 	case 8:
-		if (this->day == 31)
-		{
-			this->day = 1;
-			this->month++;
-		}
-		else {
-			this->day++;
-		}
-		break;
-	case 9:
-		if (this->day == 30)
-		{
-			this->day = 1;
-			this->month++;
-		}
-		else {
-			this->day++;
-		}
-		break;
 	case 10:
 		if (this->day == 31)
 		{
@@ -147,6 +62,21 @@ void Date::addDay() {
 			this->day++;
 		}
 		break;
+
+	case 2:
+		if (this->day == 28)
+		{
+			this->day = 1;
+			this->month++;
+		}
+		else {
+			this->day++;
+		}
+		break;
+	
+	case 4:
+	case 6:
+	case 9:
 	case 11:
 		if (this->day == 30)
 		{
@@ -157,6 +87,7 @@ void Date::addDay() {
 			this->day++;
 		}
 		break;
+
 	case 12:
 		if (this->day == 31)
 		{
@@ -172,9 +103,11 @@ void Date::addDay() {
 		cout << "month went over" << endl;
 		break;
 	}
+
+	return Date(this->day, this->month, this->year);
 }
 
-void Date::minusDay()
+Date Date::minusDay()
 {
 	if (this->day == 1)
 	{
@@ -186,6 +119,12 @@ void Date::minusDay()
 			this->year--;
 			break;
 		case 2:
+		case 4:
+		case 6:
+		case 8:
+		case 9:
+		case 11:
+
 			this->day = 31;
 			this->month--;
 			break;
@@ -193,38 +132,9 @@ void Date::minusDay()
 			this->day = 28;
 			this->month--;
 			break;
-		case 4:
-			this->day = 31;
-			this->month--;
-			break;
 		case 5:
-			this->day = 30;
-			this->month--;
-			break;
-		case 6:
-			this->day = 31;
-			this->month--;
-			break;
 		case 7:
-			this->day = 30;
-			this->month--;
-			break;
-		case 8:
-			this->day = 31;
-			this->month--;
-			break;
-		case 9:
-			this->day = 31;
-			this->month--;
-			break;
 		case 10:
-			this->day = 30;
-			this->month--;
-			break;
-		case 11:
-			this->day = 31;
-			this->month--;
-			break;
 		case 12:
 			this->day = 30;
 			this->month--;
@@ -234,6 +144,8 @@ void Date::minusDay()
 	else {
 		this->day--;
 	}
+
+	return Date(this->day, this->month, this->year);
 }
 
 void Date::sort()
@@ -256,24 +168,28 @@ void Date::sort()
 	}
 }
 
-void Date::operator++(int post)
+Date Date::operator++(int post)
 {
+	Date temp = Date(this->day, this->month, this->year);
 	addDay();
+	return temp;
 }
 
-void Date::operator++()
+Date Date::operator++()
 {
-	addDay();
+	return addDay();
 }
 
-void Date::operator--(int post)
+Date Date::operator--(int post)
 {
+	Date temp = Date(this->day, this->month, this->year);
 	minusDay();
+	return temp;
 }
 
-void Date::operator--()
+Date Date::operator--()
 {
-	minusDay();
+	return minusDay();
 }
 
 Date Date::operator+(Date date)
