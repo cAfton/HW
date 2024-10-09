@@ -20,19 +20,19 @@ public:
 	void Month(int month);
 	void Year(int year);
 
-	void addDay();
-	void minusDay();
+	Date addDay();
+	Date minusDay();
 
 	void sort();
 
 	friend ostream& operator<<(ostream& out, const Date& date);
-	friend ifstream& operator>>(ifstream& in, Date& date);
+	friend istream& operator>>(istream& in, Date& date);
 
-	void operator++(int post);
-	void operator++();
+	Date operator++(int post);
+	Date operator++();
 
-	void operator--(int post);
-	void operator--();
+	Date operator--(int post);
+	Date operator--();
 
 	Date operator+(Date date);
 	Date operator-(Date date);
