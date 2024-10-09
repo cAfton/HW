@@ -209,6 +209,11 @@ Date Date::operator+(Date date)
 	switch (ret.month)
 	{
 	case 1:
+	case 3:
+	case 5:
+	case 7:
+	case 8:
+	case 10:
 		if (this->day + date.day > 31)
 		{
 			ret.day = (this->day + date.Day()) - 31;
@@ -226,78 +231,9 @@ Date Date::operator+(Date date)
 			ret.day = this->day + date.Day();
 		}
 		break;
-	case 3:
-		if (this->day + date.day > 31)
-		{
-			ret.day = (this->day + date.Day()) - 31;
-		}
-		else {
-			ret.day = this->day + date.Day();
-		}
-		break;
 	case 4:
-		if (this->day + date.day > 30)
-		{
-			ret.day = (this->day + date.Day()) - 30;
-		}
-		else {
-			ret.day = this->day + date.Day();
-		}
-		break;
-	case 5:
-		if (this->day + date.day > 31)
-		{
-			ret.day = (this->day + date.Day()) - 31;
-		}
-		else {
-			ret.day = this->day + date.Day();
-		}
-		break;
 	case 6:
-		if (this->day + date.day > 30)
-		{
-			ret.day = (this->day + date.Day()) - 30;
-		}
-		else {
-			ret.day = this->day + date.Day();
-		}
-		break;
-	case 7:
-		if (this->day + date.day > 31)
-		{
-			ret.day = (this->day + date.Day()) - 31;
-		}
-		else {
-			ret.day = this->day + date.Day();
-		}
-		break;
-	case 8:
-		if (this->day + date.day > 31)
-		{
-			ret.day = (this->day + date.Day()) - 31;
-		}
-		else {
-			ret.day = this->day + date.Day();
-		}
-		break;
 	case 9:
-		if (this->day + date.day > 30)
-		{
-			ret.day = (this->day + date.Day()) - 30;
-		}
-		else {
-			ret.day = this->day + date.Day();
-		}
-		break;
-	case 10:
-		if (this->day + date.day > 31)
-		{
-			ret.day = (this->day + date.Day()) - 31;
-		}
-		else {
-			ret.day = this->day + date.Day();
-		}
-		break;
 	case 11:
 		if (this->day + date.day > 30)
 		{
@@ -311,6 +247,7 @@ Date Date::operator+(Date date)
 		if (this->day + date.day > 31)
 		{
 			ret.day = (this->day + date.Day()) - 31;
+			this->year++;
 		}
 		else {
 			ret.day = this->day + date.Day();
@@ -338,6 +275,7 @@ Date Date::operator-(Date date)
 		if (this->day - date.Day() < 1)
 		{
 			ret.day = 31 + (this->day - date.Day());
+			this->year--;
 		}
 		else {
 			ret.day = this->day - date.Day();
@@ -353,6 +291,11 @@ Date Date::operator-(Date date)
 		}
 		break;
 	case 3:
+	case 5:
+	case 7:
+	case 8:
+	case 10:
+	case 12:
 		if (this->day - date.Day() < 1)
 		{
 			ret.day = 31 + (this->day - date.Day());
@@ -362,81 +305,12 @@ Date Date::operator-(Date date)
 		}
 		break;
 	case 4:
-		if (this->day - date.Day() < 1)
-		{
-			ret.day = 30 + (this->day - date.Day());
-		}
-		else {
-			ret.day = this->day - date.Day();
-		}
-		break;
-	case 5:
-		if (this->day - date.Day() < 1)
-		{
-			ret.day = 31 + (this->day - date.Day());
-		}
-		else {
-			ret.day = this->day - date.Day();
-		}
-		break;
 	case 6:
-		if (this->day - date.Day() < 1)
-		{
-			ret.day = 30 + (this->day - date.Day());
-		}
-		else {
-			ret.day = this->day - date.Day();
-		}
-		break;
-	case 7:
-		if (this->day - date.Day() < 1)
-		{
-			ret.day = 31 + (this->day - date.Day());
-		}
-		else {
-			ret.day = this->day - date.Day();
-		}
-		break;
-	case 8:
-		if (this->day - date.Day() < 1)
-		{
-			ret.day = 31 + (this->day - date.Day());
-		}
-		else {
-			ret.day = this->day - date.Day();
-		}
-		break;
 	case 9:
-		if (this->day - date.Day() < 1)
-		{
-			ret.day = 30 + (this->day - date.Day());
-		}
-		else {
-			ret.day = this->day - date.Day();
-		}
-		break;
-	case 10:
-		if (this->day - date.Day() < 1)
-		{
-			ret.day = 31 + (this->day - date.Day());
-		}
-		else {
-			ret.day = this->day - date.Day();
-		}
-		break;
 	case 11:
 		if (this->day - date.Day() < 1)
 		{
 			ret.day = 30 + (this->day - date.Day());
-		}
-		else {
-			ret.day = this->day - date.Day();
-		}
-		break;
-	case 12:
-		if (this->day - date.Day() < 1)
-		{
-			ret.day = 31 + (this->day - date.Day());
 		}
 		else {
 			ret.day = this->day - date.Day();
