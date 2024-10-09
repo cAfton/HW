@@ -328,8 +328,14 @@ ostream& operator<<(ostream& out, const Date& date)
 	return out;
 }
 
-ifstream& operator>>(ifstream& in, Date& date)
+istream& operator>>(istream& in, Date& date)
 {
+	cout << "Date: ";
+	in >> date.day;
+	cout << "\nMonth: ";
+	in >> date.month;
+	cout << "\nYear: ";
+	in >> date.year;
 	return in;
 }
 ///////////////

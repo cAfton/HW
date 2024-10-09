@@ -26,7 +26,7 @@ public:
 	void sort();
 
 	friend ostream& operator<<(ostream& out, const Date& date);
-	friend ifstream& operator>>(ifstream& in, Date& date);
+	friend istream& operator>>(istream& in, Date& date);
 
 	Date operator++(int post);
 	Date operator++();
