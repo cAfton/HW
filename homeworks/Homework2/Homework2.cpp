@@ -2,26 +2,26 @@
 
 int main()
 {
-    Date date1(7, 9, 2009);
-    Date date2(29, 10, 2008);
+    Date date1;
+    Date date2;
+
+    cin >> date1;
 
     cout << date1 << endl;
 
-    date1++;
+    cin >> date2;
 
     cout << date1 << endl;
 
-    ++date1;
+    cout << "//////////////////////////////////////" << endl;
 
-    cout << date1 << endl;
+    cout << date1++ << endl;
 
-    date1--;
+    cout << ++date1 << endl;
 
-    cout << date1 << endl;
+    cout << date1-- << endl;
 
-    --date1;
-
-    cout << date1 << endl;
+    cout << --date1 << endl;
 
     cout << date1 + date2 << endl;
 
