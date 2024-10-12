@@ -121,6 +121,16 @@ public:
         return out;
     }
 
+    int Count() {
+        int Count = 0;
+        while (cur != nullptr) {
+            cur = cur->next;
+            Count++;
+        }
+
+        return Count;
+    }
+
     ~LinkedList() {
         Node* cur = first;
         while (cur != nullptr) {
