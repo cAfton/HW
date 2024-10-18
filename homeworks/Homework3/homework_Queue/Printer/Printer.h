@@ -10,34 +10,17 @@ class Client {
 	int priority;
 	string time_printed;
 public:
-	Client()
-	{
-		this->name = "no_name";
-		this->priority = -1;
-		this->time_printed = "-1";
-	}
+	Client();
 
-	Client(string name, int priority, string timePrinted) {
-		this->name = name;
-		this->priority = priority;
-		this->time_printed = timePrinted;
-	}
+	Client(string name, int priority, string timePrinted);
 
-	string getName() {
-		return this->name;
-	}
+	string getName();
 
-	int getPriority() {
-		return this->priority;
-	}
+	int getPriority();
 
-	string getTime() {
-		return this->time_printed;
-	}
+	string getTime();
 
-	void addToPriority() {
-		this->priority++;
-	}
+	void addToPriority();
 };
 
 class Queue {
@@ -46,67 +29,15 @@ class Queue {
 	int size;
 	int start;
 public:
-	Queue() {
-		arr = new Client[5];
-		lengh = 0;
-		size = 5;
-		start = 0;
-	}
+	Queue();
 
-	void push(Client elem) {
-		Client* newArr = new Client[size + 1];
-		size += 1;
-		bool isAdded = false;
-		for (int i = start, k = 0; i < lengh; i++, k++)
-		{
-			
-			if (!isAdded && elem.getPriority() <= this->arr[i].getPriority())
-			{
-				newArr[k] = elem;
-				isAdded = true;
-				k++;
-			}
-			newArr[k] = arr[i];
-			if (isAdded)
-			{
-				newArr[k].addToPriority();
-			}
-		}
-		if (!isAdded)
-		{
-			newArr[lengh] = elem;
-		}
-		start = 0;
-		lengh++;
-		delete[] arr;
-		arr = newArr;
-	}
+	void push(Client elem);
 
-	Client pop() {
-	      if (lengh - start != 0)
-	      {
-			  Client temp = arr[start];
-		      start++;
-		      return temp;
-		  }
-		  else {
-		      throw invalid_argument("error while poping");
-		  }
-	}
+	Client pop();
 
-	Client peek() {
-		return arr[start];
-		
-    }
+	Client peek();
 
-	friend ostream& operator<<(ostream& out, Queue& queue) {
-		for (size_t i = 0; i < queue.lengh; i++)
-		{
-			out << "Name: " << queue.arr[i].getName() << "\nPriority: " << queue.arr[i].getPriority() << "\nTime printed: " << queue.arr[i].getTime() << endl;
-		}
-		return out;
-	}
-	~Queue() {
-		delete[] arr;
-	}
+	friend ostream& operator<<(ostream& out, Queue& queue);
+
+	~Queue();
 };
