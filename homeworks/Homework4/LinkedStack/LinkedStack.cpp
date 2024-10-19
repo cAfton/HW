@@ -35,6 +35,10 @@ public:
         first = nullptr;
     }
 
+    Node* getFirst() {
+        return this->first;
+    }
+
     void push(T elem) {
 
         if (first != nullptr)
@@ -92,18 +96,21 @@ public:
         }
     }
 
-    void showList() {
-        Node* cur = first;
+
+    friend ostream& operator<<(ostream& out, LinkedList& list) {
+        Node* cur = list.getFirst();
         while (cur != nullptr) {
-            cout << cur->item;
+            out << cur->item;
             if (cur->next != nullptr)
             {
-                cout << " -> ";
+                out << " -> ";
             }
             cur = cur->next;
         }
         delete cur;
-        cout << endl;
+        out << endl;
+
+        return out;
     }
 
 };
@@ -120,7 +127,7 @@ int main()
     list1.push(5);
     list1.push(6);
     list1.push(7);
-    list1.showList();
+    cout << list1 << endl;
     cout << "///////////" << endl;
 
     cout << list1.peek() << endl;
