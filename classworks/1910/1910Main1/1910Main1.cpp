@@ -60,43 +60,81 @@ public:
     int Lengh() {
         return this->lengh;
     }
+
+    friend ostream& operator<<(ostream& out, Stack<int> stack2) {
+        out << "[";
+        for (; !stack2.isEmpty(); )
+        {
+            cout << stack2.pop() << ", ";
+        } out << "]";
+        return out;
+    }
+    
 };
-
-
-void reverce(Stack<int>& stack) {
+Stack<int> reverce(Stack<int> stack) {
     Stack<int> temp;
     while (!stack.isEmpty())
     {
         temp.push(stack.pop());
     }
+    return temp;
+}
+Stack<int> operator*(int Multiplier1, Stack<int> number) {
+    Stack<int> result;
+    int temp = 0;
+    int val = 0;
+    while (!number.isEmpty()) {
+        number = reverce(number);
+       // cout << "result: " << number << endl;
+        val = ((number.pop() * Multiplier1) + temp);
+        result.push(val % 10);
+        temp = val / 10;
+    }
+    if (val / 10 != 0) {
+        result.push(val / 10);
+    }
+    return result;
 
-    stack = temp;
 }
 
 
-Stack<int> MultiplyStackByNum(int num, Stack<int>& stack) {
-    Stack<int> stackFinal;
-    int temp = 0;
-    while (!stack.isEmpty())
+void intToStack(int num, Stack<int>& stack) {
+    int copy = num;
+    int save = copy % 10;
+    while (num / 10 != 0)
     {
 
-        cout << "counted without temp: " << stack.peek() * num << endl;
-        cout << "counted with temp: " << (stack.peek() * num) + temp << endl;
-        int val = (stack.pop() * num) + temp;
-        cout << "val: " << val << endl;
-        temp = val / 10;
-        cout << "temp: " << temp << endl;
-        int add = val % 10;
-        cout << "add: " << add << endl;
-        stackFinal.push(add);
-        cout << "--------" << endl;
-
+        int pushh = num / 10;
+        stack.push(pushh);
+        num = num / 10;
     }
-    stackFinal.push(temp);
 
-    return stackFinal;
+    stack.push(save);
+    //cout << "result1: " << stack << endl;
+
 }
+//[[[[[[8*7]*6]*5]*4]*3]*2], num = 8
 
+Stack<int> factorial(int num, Stack<int> res, bool once)
+{
+    cout << "res: " << res << endl;
+    if (num == 0)
+    {
+        return res;
+    }
+    if (once)
+    {
+        int save = num * (num - 1);
+        //cout << "save: " << save << endl;
+        intToStack(save, res);
+        num -= 2;
+    }
+    else {
+        res = num * res;
+    }
+
+    return (factorial(num - 1, res, false));
+}
 int recurciveFact(int num) {
 	if (num == 1)
 	{
@@ -181,63 +219,32 @@ int subFactorial(int numSub) {
 //    return num * factorial(num - 1);
 //}
 
-Stack<int> factorial(int n)
-{
-    Stack<int> result;
-    result.push(1);
-    for (int i = 2; i <= n; i++)
-    {
-        Stack<int> tempStack;
-        int temp = 0;//перенесення для множення
-        while (!result.isEmpty())
-        {
-            int value = result.pop();
-            int p = value * i + temp;
-            tempStack.push(p % 10); //збероігаємо останню цифру
-            temp = p / 10;//переносимо залишок           
-        }
-
-        //якщо залишився перенос, додаємо його
-        while (temp > 0)
-        {
-            tempStack.push(temp % 10);
-            temp /= 10;
-        }
-        //перезаписуємо результат з tempStack в result
-        while (!tempStack.isEmpty())
-        {
-            result.push(tempStack.pop());
-        }
-    }
-    return result;
-}
 
 int main()
 {
-    Stack<int> stackStart;
-    Stack<int> stackFinal;
 	cout << recurciveFact(5) << endl;
 	cout << subFactorial(5) << endl;
 	cout << stepin(5, 3) << endl;
-    //Stack<int> stackFinalRes = factorial(5, stackStart, stackFinal, true);
 
-    cout << "////////////////////////////////////////////////" << endl;
+    cout << "//////////////////////////////////////////////// recursive stack factorial: " << endl;
 
     Stack<int> FinalRes;
-    FinalRes.push(1);
-    FinalRes.push(5);
-    FinalRes.push(4);
-    for (; !FinalRes.isEmpty();)
-    {
-        cout << FinalRes.pop();
-    }cout << endl;
-    FinalRes.push(1);
-    FinalRes.push(5);
-    FinalRes.push(4);
-    reverce(FinalRes);
+    Stack<int> stack1;
+    cout << "8! = 40320" << endl;
+    //[[[[[[8*7]*6]*5]*4]*3]*2]
 
-    for (; !FinalRes.isEmpty();)
+    Stack<int> res = factorial(8, FinalRes, true);
+
+    for (;!res.isEmpty();)
     {
-        cout << FinalRes.pop();
+        cout << res.pop();
+    }cout << endl;
+    stack1.push(1);
+    stack1.push(2);
+    stack1.push(3);
+    reverce(stack1);
+    for (; !stack1.isEmpty();)
+    {
+        cout << stack1.pop();
     }cout << endl;
 }
