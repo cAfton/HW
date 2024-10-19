@@ -95,10 +95,15 @@ public:
     void showList() {
         Node* cur = first;
         while (cur != nullptr) {
-            cout << cur->item << " -> ";
+            cout << cur->item;
+            if (cur->next != nullptr)
+            {
+                cout << " -> ";
+            }
             cur = cur->next;
         }
         delete cur;
+        cout << endl;
     }
 
 };
