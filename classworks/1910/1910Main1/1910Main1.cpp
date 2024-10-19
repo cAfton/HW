@@ -62,27 +62,16 @@ public:
     }
 };
 
-//
-//void reverce(Stack<int> stack) {
-//    if (stack.Lengh() > 0)
-//    {
-//        int* temp = new int[stack.Lengh()];
-//        int templengh = stack.Lengh();
-//        for (size_t i = 0; i < stack.Lengh() + 1; i++)
-//        {
-//            cout << "reverce peek pop: " << stack.peek() << endl;
-//            temp[i] = stack.pop();
-//        }
-//
-//        for (size_t i = 0; i < templengh; i++)
-//        {
-//            cout << "reverce peek push: " << stack.peek() << endl;
-//
-//            stack.push(temp[i]);
-//        }
-//    }
-//
-//}
+
+void reverce(Stack<int>& stack) {
+    Stack<int> temp;
+    while (!stack.isEmpty())
+    {
+        temp.push(stack.pop());
+    }
+
+    stack = temp;
+}
 
 
 Stack<int> MultiplyStackByNum(int num, Stack<int>& stack) {
@@ -136,59 +125,92 @@ int subFactorial(int numSub) {
 	return (numSub - 1) * (subFactorial(numSub - 1) + subFactorial(numSub - 2));
 }
 // (n - 1) * (!(n -1) + !(n -2))
+//
+//Stack<int> factorialStack(int num, Stack<int> stackStart, Stack<int> stackFinal, bool once) {
+//    cout << "size: " << stackStart.Size() << endl;
+//    cout << "num: " << num << endl;
+//    int val = 0;
+//    int temp = 0;
+//
+//    if (once)
+//    {
+//        int first = (num * (num - 1)) % 10;
+//        int second = (num * (num - 1)) / 10;
+//        cout << "first: " << first << " || second:" << second << endl;
+//        stackStart.push(first);
+//        stackStart.push(second);
+//        reverce(stackFinal);
+//
+//        cout << "peek: " << stackStart.peek() << endl;
+//    }
+//    if (num == 1)
+//    {
+//        stackFinal.push(temp);
+//        return stackFinal;
+//    }
+//    cout << "\n\n\nwhile: " << endl; 
+//    if (!once)
+//    {
+//        stackFinal = MultiplyStackByNum(num, stackStart);
+//    }
+//   
+//    if (once)
+//    {
+//        stackFinal = stackStart;
+//    }
+//    once = false;
+//
+//    Stack<int> stackNew;
+//
+//    cout << endl;
+//    cout << endl;
+//
+//    cout << "size: " << stackFinal.Size() << endl;
+//    Stack<int> tempStack = stackFinal;
+//    cout << "result: " << endl;
+//    while (!tempStack.isEmpty()) {
+//        cout << tempStack.pop();
+//    }
+//    cout << endl;
+//
+//    return factorialStack(num - 1, stackFinal, stackNew, once);
+//}
+//
+//Stack<int> factorial(int num) {
+//
+//    return num * factorial(num - 1);
+//}
 
-Stack<int> factorialStack(int num, Stack<int> stackStart, Stack<int> stackFinal, bool once) {
-    cout << "size: " << stackStart.Size() << endl;
-    cout << "num: " << num << endl;
-    int val = 0;
-    int temp = 0;
-
-    if (once)
+Stack<int> factorial(int n)
+{
+    Stack<int> result;
+    result.push(1);
+    for (int i = 2; i <= n; i++)
     {
-        int first = (num * (num - 1)) % 10;
-        int second = (num * (num - 1)) / 10;
-        cout << "first: " << first << " || second:" << second << endl;
-        stackStart.push(first);
-        stackStart.push(second);
-        cout << "peek: " << stackStart.peek() << endl;
-    }
-    if (num == 1)
-    {
-        stackFinal.push(1);
-        return stackFinal;
-    }
-    cout << "\n\n\nwhile: " << endl; 
-    //reverce(stackStart);
-    //cout << "peek after reverce: " << stackStart.peek() << endl;
+        Stack<int> tempStack;
+        int temp = 0;//перенесення для множення
+        while (!result.isEmpty())
+        {
+            int value = result.pop();
+            int p = value * i + temp;
+            tempStack.push(p % 10); //збероігаємо останню цифру
+            temp = p / 10;//переносимо залишок           
+        }
 
-    if (!once)
-    {
-        stackFinal = MultiplyStackByNum(num, stackStart);
+        //якщо залишився перенос, додаємо його
+        while (temp > 0)
+        {
+            tempStack.push(temp % 10);
+            temp /= 10;
+        }
+        //перезаписуємо результат з tempStack в result
+        while (!tempStack.isEmpty())
+        {
+            result.push(tempStack.pop());
+        }
     }
-   
-    if (once)
-    {
-        stackFinal = stackStart;
-    }
-    once = false;
-
-    Stack<int> stackNew;
-
-    cout << endl;
-    cout << endl;
-
-    cout << "size: " << stackFinal.Size() << endl;
-    Stack<int> tempStack = stackFinal;
-    cout << "result: " << endl;
-    while (!tempStack.isEmpty()) {
-        cout << tempStack.pop();
-    }
-    cout << endl;
-
-    return factorialStack(num - 1, stackFinal, stackNew, once);
+    return result;
 }
-
-
 
 int main()
 {
@@ -197,31 +219,25 @@ int main()
 	cout << recurciveFact(5) << endl;
 	cout << subFactorial(5) << endl;
 	cout << stepin(5, 3) << endl;
-    Stack<int> stackFinalRes = factorialStack(5, stackStart, stackFinal, true);
-
+    //Stack<int> stackFinalRes = factorial(5, stackStart, stackFinal, true);
 
     cout << "////////////////////////////////////////////////" << endl;
-    while (!stackFinalRes.isEmpty()) {
-        cout << stackFinalRes.pop();
-    }
-    cout << endl;
-    cout << "////////////////////////////////////////////////" << endl;
-    Stack<int> tryStack;
-    
-    tryStack.push(3);
-    cout << "first: " << tryStack.peek() << endl;
-    tryStack.push(7);
-    cout << "second: " << tryStack.peek() << endl;
-    cout << "multiple by 5" << endl;
-    
-    //reverce(tryStack);
-    //cout << "after reversed: " << tryStack.peek() << endl;
 
-    Stack<int> printRes = MultiplyStackByNum(5, tryStack);
-
-    for (size_t i = 0;  !printRes.isEmpty(); i++)
+    Stack<int> FinalRes;
+    FinalRes.push(1);
+    FinalRes.push(5);
+    FinalRes.push(4);
+    for (; !FinalRes.isEmpty();)
     {
-        cout << printRes.pop();
+        cout << FinalRes.pop();
     }cout << endl;
+    FinalRes.push(1);
+    FinalRes.push(5);
+    FinalRes.push(4);
+    reverce(FinalRes);
 
+    for (; !FinalRes.isEmpty();)
+    {
+        cout << FinalRes.pop();
+    }cout << endl;
 }
