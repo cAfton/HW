@@ -6,6 +6,13 @@ class Vehicle {
 	int max_speed;
 	int distance;
 	int weight;
+protected:
+	void setDis(int dis) {
+		this->distance = dis;
+	}
+	int getDis() {
+		return this->distance;
+	}
 public:
 	Vehicle() {
 		this->max_speed = 1;

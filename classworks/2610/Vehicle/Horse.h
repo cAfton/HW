@@ -20,9 +20,14 @@ public:
 	}
 
 	void Feed(int food) {
+		setDis(getDis() + food);
 		cout << ">:3" << endl;
+		cout << getDis() << endl;
 	}
 	void Sleep(int sleep) {
+		setDis(getDis() + sleep);
 		cout << "|o" << endl;
+		cout << getDis() << endl;
+
 	}
 };
