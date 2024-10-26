@@ -144,10 +144,6 @@ public:
 		Root = nullptr;
 	}
 
-	~Tree()
-	{
-
-	}
 
 };
 
