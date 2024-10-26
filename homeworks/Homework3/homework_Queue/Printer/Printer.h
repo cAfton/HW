@@ -21,6 +21,13 @@ public:
 	string getTime();
 
 	void addToPriority();
+
+	friend ostream& operator<<(ostream& out, Client client) {
+		out << "Name: " << client.getName() << "\nPriority: " << client.getPriority() << "\nTime printed: " << client.getTime() << endl;
+
+		return out;
+	}
+
 };
 
 class Queue {

@@ -78,7 +78,7 @@ void Queue::push(Client elem)
 	else {
 		Client* newArr = new Client[size];
 		bool isAdded = false;
-		for (int i = 0, k = 0; i < lengh; i++, k++)
+		for (int i = start, k = 0; i < lengh; i++, k++)
 		{
 
 			if (!isAdded && elem.getPriority() <= this->arr[i].getPriority())
@@ -113,12 +113,19 @@ Client Queue::pop()
 	{
 		Client temp = arr[start];
 		start++;
-		if (start == 20)
+		if (start % 2 == 0)
 		{
-			for (size_t i = 0; i < 21; i++)
+			Client* newArr = new Client[size - 2];
+			
+			for (int i = start, k = 0; i < lengh; i++, k++)
 			{
-				delete &arr[i];
+				newArr[k] = arr[i];
 			}
+			start = 0;
+			size -= 2;
+			lengh -= 2;
+			delete[] arr;
+			arr = newArr;
 		}
 		return temp;
 	}
@@ -131,6 +138,7 @@ Client Queue::peek()
 {
 	return arr[start];
 }
+
 
 
 ostream& operator<<(ostream& out, Queue& queue)
