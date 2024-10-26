@@ -37,8 +37,8 @@ int main()
         queue.pop();
         queue.pop();
     }
-    catch(invalid_argument){
-        cout << "error" << endl;
+    catch(runtime_error){
+        cout << "error poping" << endl;
     }
 }
 
