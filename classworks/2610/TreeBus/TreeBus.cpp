@@ -1,68 +1,111 @@
-#include <iostream>
+﻿#include <iostream>
 using namespace std;
 
-class Bus
-{
+class Buss {
+private:
+	int BusNumber;
+	int RouteNumber;
+	int sits;
+	string Driver;
 public:
-	Bus() {
-		BusId = 1488;
+	Buss() {
+		BusNumber = 1939;
 		Driver = "Michail";
-		RouteNumber = 99;
-		Sits = 22;
+		RouteNumber = 9;
+		sits = 30;
 	}
-	Bus(int id, string name, int route, int sit) {
-		BusId = id;
-		Driver = name;
-		RouteNumber = route;
-		Sits = sit;
+	Buss(int BussNum, string name, int route, int Sits) {
+		BussNum = BusNumber;
+		name = Driver;
+		route = RouteNumber;
+		Sits = sits;
 	}
-
-	int getBusId() {
-		return this->BusId;
-	}
-
-	int getRouteNum() {
-		return this->RouteNumber;
-	}
-
-	friend ostream& operator<< (ostream& wiwod, Bus& Elektron) {
-		wiwod << Elektron.BusId << " ";
-		wiwod << Elektron.Driver << " ";
-		wiwod << Elektron.RouteNumber << " ";
-		wiwod << Elektron.Sits << " ";
-
+	friend ostream& operator<<(ostream& wiwod, Buss Bus) {
+		wiwod << Bus.BusNumber << " ";
+		wiwod << Bus.Driver << " ";
+		wiwod << Bus.RouteNumber << " ";
+		wiwod << Bus.sits << " ";
+		wiwod << endl;
 		return wiwod;
 	}
 
-	bool operator> (Bus& bilshe) {
-		if (this->BusId > bilshe.BusId) {
+	friend istream& operator>>(istream& in, Buss& Bus) {
+		int newBN, newRN, newS;
+		string D;
+		cout << "Bus number: ";
+		in >> Bus.BusNumber;
+		cout << "\n\nRoute number: ";
+		in >> Bus.RouteNumber;
+		cout << "\n\nDriver: ";
+		in >> Bus.Driver;
+		cout << "\n\nNumber of sits: ";
+		in >> Bus.sits;
+
+		return in;
+
+
+
+	}
+
+	bool operator > (Buss& bilshe) {
+		if (this->BusNumber > bilshe.BusNumber) {
 			return true;
 		}
-		else {
+		else
+		{
 			return false;
 		}
 	}
-	bool operator< (Bus& menshe) {
-		if (this->BusId < menshe.BusId) {
-			return false;
-		}
-		else {
+	bool operator > (int bilshe) {
+		if (this->BusNumber > bilshe) {
 			return true;
 		}
-	}
-	bool operator== (Bus& rivne) {
-		if (this->BusId == rivne.BusId) {
-			return true;
-		}
-		else {
+		else
+		{
 			return false;
 		}
 	}
-private:
-	int BusId;
-	string Driver;
-	int RouteNumber;
-	int Sits;
+
+	bool operator < (Buss& menshe) {
+		if (this->BusNumber < menshe.BusNumber) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	bool operator < (int menshe) {
+		if (this->BusNumber < menshe) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	bool operator == (Buss& rivne) {
+		if (this->BusNumber == rivne.BusNumber) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	bool operator == (int Num) {
+		if (Num == this->BusNumber) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	~Buss() {
+
+	}
 };
 
 
@@ -71,15 +114,15 @@ class Tree
 private:
 	struct Node
 	{
-		Bus elem;
+		Buss elem;
 		Node* left;
 		Node* right;
-		Node()
+		Node() : elem(Buss())
 		{
 			left = nullptr;
 			right = nullptr;
 		}
-		Node(Bus elem, Node* left, Node* right)
+		Node(Buss elem, Node* left, Node* right)
 		{
 			this->elem = elem;
 			this->left = left;
@@ -90,7 +133,7 @@ private:
 			A << Elem.elem;
 			return A;
 		}
-		void Add(Bus elem)
+		void Add(Buss elem)
 		{
 			if (elem < this->elem)
 			{
@@ -101,9 +144,12 @@ private:
 				{
 					this->left->Add(elem);
 				}
+
 			}
 			else
 			{
+
+
 				if (this->right == nullptr) {
 					right = new Node(elem, nullptr, nullptr);
 				}
@@ -111,62 +157,55 @@ private:
 				{
 					this->right->Add(elem);
 				}
+
 			}
 		}
 
 		void print(ostream& out) {
-			if (this->left != nullptr) {
+			if (this->left != nullptr)
+			{
 				left->print(out);
-				if (this->right != nullptr) {
-					right->print(out);
-					out << this->elem << ' ';
-				}
-				else {
-					out << this->elem << ' ';
-				}
 			}
-			else if (this->right != nullptr) {
+			else if (this->right != nullptr)
+			{
 				right->print(out);
-				out << this->elem << ' ';
 			}
 			else {
-				out << this->elem << ' ';
+				out << this->elem;
 			}
 		}
 
-		Bus find(int numToFind) {
-			if (numToFind > this->elem.getBusId())
-			{
-				if (this->right != nullptr)
-				{
-					right->find(numToFind);
-				}
-				else {
-					throw invalid_argument("error");
-				}
-			}
-			else if (numToFind < this->elem.getBusId())
-			{
-				if (this->left != nullptr)
-				{
-					left->find(numToFind);
-				}
-				else {
-					throw invalid_argument("error");
-				}
-			}
-			else {
+		Buss find(int BussNumber) {
+			if (this->elem == BussNumber) {
 				return this->elem;
 			}
+			else if (this->elem < BussNumber) {
+				if (this->right != nullptr) {
+					return this->right->find(BussNumber);
+				}
+				else
+				{
+					throw exception();
+				}
+			}
+			else {
+				if (this->left != nullptr) {
+					return this->left->find(BussNumber);
+				}
+				else
+				{
+					throw exception();
+				}
+			}
+
 		}
 	};
-
 	Node* Root;
 
 
 public:
 
-	void Add(Bus elem)
+	void Add(Buss elem)
 	{
 		if (Root == nullptr)
 		{
@@ -176,70 +215,65 @@ public:
 		{
 			Root->Add(elem);
 		}
-	}
 
-	Bus find(int numToFind) {
-		if (Root == nullptr)
-		{
-			throw invalid_argument("error");
-		}
-		else if (Root->elem.getBusId() == numToFind)
-		{
-			return Root->elem;
+
+	}
+	Buss find(int BussNumber) {
+		if (Root == nullptr) {
+			cout << "error, not found";
 		}
 		else
 		{
-			Root->find(numToFind);
+			return Root->find(BussNumber);
 		}
-	}
 
-	friend ostream& operator<<(ostream& out, Tree copy) {
-		copy.Root->print(out);
-		return out;
+
 	}
 
 	Tree() {
 		Root = nullptr;
 	}
+	~Tree()
+	{
 
-
+	}
 };
 
+
 int main() {
-	Tree tree;
-	int userChoice = 0;
-	while (true) {
-		cout << "\n1 - add new\n2 - find by" << endl;
-		cin >> userChoice;
-		if (userChoice == 1)
+	setlocale(LC_ALL, "ukr");
+	int Menu = -1;
+	Tree newTree;
+	while (Menu != 0) {
+		cout << "choose: \n";
+		cout << "1. Find by key\n";
+		cout << "2. add" << endl;
+		cin >> Menu;
+		switch (Menu)
 		{
-			int newBusId, newRouteNumber, newSits;
-			string newDriver;
-
-			cout << "Bus ID: ";
-			cin >> newBusId;
-			cout << "\n\nRoute Number: ";
-			cin >> newRouteNumber;
-			cout << "\n\nDriver's name: ";
-			cin >> newDriver;
-			cout << "\n\nNumber of sits: ";
-			cin >> newSits;
-
-			Bus bus(newBusId, newDriver, newRouteNumber, newSits);
-			cout << "new bus:     " << bus << endl;
-			tree.Add(bus);
+		case 1:
+		{
+			int BussNum;
+			cout << "Bus Num - ";
+			cin >> BussNum;
+			try {
+				cout << newTree.find(BussNum);
+			}
+			catch (exception) {
+				cout << "no elem" << endl;
+			}
+			break;
 		}
-		else if (userChoice == 2) {
-			int numToFind;
-			cout << "Num to find: ";
-			cin >> numToFind;
+		case 2:
+		{
+			Buss newBuss;
+			cin >> newBuss;
+			newTree.Add(newBuss);
 
-			Bus res = tree.find(numToFind);
-			cout << "found:   " << res;
+			break;
 		}
-		else if (userChoice == 3) {
-			cout << tree << endl;
+		default:
+			break;
 		}
 	}
-
 }
