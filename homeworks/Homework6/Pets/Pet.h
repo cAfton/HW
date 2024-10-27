@@ -8,6 +8,8 @@ class Pet
 	string name;
 	int age;
 public:
-	Pet();
+	Pet() {
+
+	}
 
 };
