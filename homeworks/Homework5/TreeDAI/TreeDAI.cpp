@@ -37,6 +37,10 @@ public:
 
 
 	int getNumber() {
+		return this->carNumber;
+	}
+
+	int getSize() {
 		return this->size;
 	}
 
@@ -57,9 +61,30 @@ public:
 		out << "Offenses: \n";
 		for (size_t i = 0; i < car.size; i++)
 		{
-			out << car.offense[i] << endl;
+			switch (car.offense[i])
+			{
+			case 0:
+				out << "Speeding" << endl;
+				break;
+			case 1:
+				out << "Illegal parking" << endl;
+				break;
+			case 2:
+				out << "Running a red light" << endl;
+				break;
+			case 3:
+				out << "No seatbelt" << endl;
+				break;
+			case 4:
+				out << "Phone use while driving" << endl;
+				break;
+			default:
+				break;
+			}
 		}
 		out << "\nTotal " << car.size << " offenses" << endl;
+
+		return out;
 	}
 };
 
@@ -136,7 +161,7 @@ private:
 			}
 		}
 
-		Car find(int numToFind) {
+		Car& find(int numToFind) {
 			if (numToFind > this->elem.getNumber())
 			{
 				if (this->right != nullptr)
@@ -144,7 +169,7 @@ private:
 					return right->find(numToFind);
 				}
 				else {
-					throw invalid_argument("error");
+					throw exception("error");
 				}
 			}
 			else if (numToFind < this->elem.getNumber())
@@ -154,7 +179,7 @@ private:
 					return left->find(numToFind);
 				}
 				else {
-					throw invalid_argument("error");
+					throw exception("error");
 				}
 			}
 			else {
@@ -180,10 +205,10 @@ public:
 		}
 	}
 
-	Car find(int numToFind) {
+	Car& find(int numToFind) {
 		if (Root == nullptr)
 		{
-			throw invalid_argument("error");
+			throw exception("error");
 		}
 		else if (Root->elem.getNumber() == numToFind)
 		{
@@ -196,7 +221,13 @@ public:
 	}
 
 	friend ostream& operator<<(ostream& out, Tree copy) {
-		copy.Root->print(out);
+		if (copy.Root != nullptr)
+		{
+			copy.Root->print(out);
+		}
+		else {
+			out << "empty";
+		}
 		return out;
 	}
 
@@ -209,13 +240,99 @@ public:
 
 
 int main() {
-	//Tree DAI;
+	Tree DAI;
 	int userChoise = -1;
 
-	while (userChoise == 0)
+	while (userChoise != 0)
 	{
-		cout << "0 - exit\n\n1 - add fine receipt\n2 - print all receipts\n3 - print receipt by number\n4 - print by number range\n\n";
+		system("cls");
+		cout << "0 - exit\n\n1 - add fine receipt\n2 - print all receipts\n3 - print receipt by number\n\n";
 		cin >> userChoise;
+		system("cls");
+		if (userChoise == 1)
+		{
+			int carNum;
+			cout << "Enter car number: ";
+			cin >> carNum;
+			cout << endl;
+			try {
+				Car& temp = DAI.find(carNum);
+				cout << "1 - speeding\n2 - illegal_parking\n3 - running_a_red_light\n4 - no_seatbelt\n5 - phone_use_while_driving\n" << endl;
+				cin >> userChoise;
+				switch (userChoise)
+				{
+				case 1:
+					temp.addOffense(speeding);
+					break;
+				case 2:
+					temp.addOffense(illegal_parking);
+					break;
+				case 3:
+					temp.addOffense(running_a_red_light);
+					break;
+				case 4:
+					temp.addOffense(no_seatbelt);
+					break;
+				case 5:
+					temp.addOffense(phone_use_while_driving);
+					break;
+				default:
+					cout << "wrong choose" << endl;
+					break;
+				}
+			}
+			catch (exception) {
+				Car newCar(carNum);
+				bool add = true;
+				cout << "1 - speeding\n2 - illegal_parking\n3 - running_a_red_light\n4 - no_seatbelt\n5 - phone_use_while_driving\n" << endl;
+				cin >> userChoise;
+				switch (userChoise)
+				{
+				case 1:
+					newCar.addOffense(speeding);
+					break;
+				case 2:
+					newCar.addOffense(illegal_parking);
+					break;
+				case 3:
+					newCar.addOffense(running_a_red_light);	
+					break;
+				case 4:
+					newCar.addOffense(no_seatbelt);
+					break;
+				case 5:
+					newCar.addOffense(phone_use_while_driving);
+					break;
+				default:
+					add = false;
+					cout << "wrong choose" << endl;
+					break;
+				}
+				if (add)
+				{
+					DAI.Add(newCar);
+				}
+			}
+
+		}
+		else if (userChoise == 2) {
+			cout << DAI << endl;
+			system("pause");
+		}
+		else if (userChoise == 3) {
+			int numFind;
+			cout << "enter number to find: ";
+			cin >> numFind;
+			system("cls");
+			try {
+				cout << DAI.find(numFind) << endl;
+			}
+			catch (exception) {
+				cout << "nothing found" << endl;
+			}
+			system("pause");
+
+		}
 	}
 
 
