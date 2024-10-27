@@ -10,9 +10,9 @@ private:
         T item;
         Node* next;
 
-        Node(T it, Node* ne) {
-            this->item = it;
-            this->next = ne;
+        Node(T item, Node* next) {
+            this->item = item;
+            this->next = next;
         }
 
         Node() {
