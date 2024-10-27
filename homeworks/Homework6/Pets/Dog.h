@@ -21,7 +21,7 @@ public:
 	}
 
 	int Intelligence() {
-		return getAge() * guarding_qualities * 2; //let it be
+		return getAge() + guarding_qualities; //let it be
 	}
 
 	friend ostream& operator<<(ostream& out, Dog& dog) {

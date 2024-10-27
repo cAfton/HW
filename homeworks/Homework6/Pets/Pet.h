@@ -29,7 +29,7 @@ public:
 	virtual int Intelligence() = 0;
 
 	friend ostream& operator<<(ostream& out, Pet& pet) {
-		out << "Name: " << pet.name << "\nAge: " << pet.age;
+		out << "Name: " << pet.name << "\nAge: " << pet.age << " years";
 		return out;
 	}
 

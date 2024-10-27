@@ -21,7 +21,7 @@ public:
 	}
 
 	int Intelligence() {
-		return getAge() * words; //let it be
+		return (getAge() * 10) + words; //let it be
 	}
 
 	friend ostream& operator<<(ostream& out, Parrot& parrot) {
