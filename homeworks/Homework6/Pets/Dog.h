@@ -1,9 +1,6 @@
 #pragma once
 #include "Pet.h"
 
-#pragma once
-#include "Pet.h"
-
 class Dog : public Pet {
 	int guarding_qualities; //dog's ability to guard its owners
 public:
