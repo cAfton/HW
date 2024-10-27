@@ -46,32 +46,64 @@ Queue::Queue()
 
 void Queue::push(Client elem)
 {
-	Client* newArr = new Client[size + 1];
-	size += 1;
-	bool isAdded = false;
-	for (int i = start, k = 0; i < lengh; i++, k++)
+	if (lengh >= size)
 	{
+		Client* newArr = new Client[size * 2];
+		size *= 2;
+		bool isAdded = false;
+		for (int i = 0, k = 0; i < lengh; i++, k++)
+		{
 
-		if (!isAdded && elem.getPriority() <= this->arr[i].getPriority())
-		{
-			newArr[k] = elem;
-			isAdded = true;
-			k++;
+			if (!isAdded && elem.getPriority() <= this->arr[i].getPriority())
+			{
+				newArr[k] = elem;
+				isAdded = true;
+				k++;
+			}
+			newArr[k] = arr[i];
+			if (isAdded)
+			{
+				newArr[k].addToPriority();
+			}
 		}
-		newArr[k] = arr[i];
-		if (isAdded)
+		start = 0;
+		if (!isAdded)
 		{
-			newArr[k].addToPriority();
+			newArr[lengh] = elem;
 		}
+		lengh++;
+		delete[] arr;
+		arr = newArr;
 	}
-	if (!isAdded)
-	{
-		newArr[lengh] = elem;
+	else {
+		Client* newArr = new Client[size];
+		bool isAdded = false;
+		for (int i = start, k = 0; i < lengh; i++, k++)
+		{
+
+			if (!isAdded && elem.getPriority() <= this->arr[i].getPriority())
+			{
+				newArr[k] = elem;
+				isAdded = true;
+				k++;
+			}
+			newArr[k] = arr[i];
+			if (isAdded)
+			{
+				newArr[k].addToPriority();
+			}
+		}
+		start = 0;
+		if (!isAdded)
+		{
+			newArr[lengh] = elem;
+		}
+		lengh++;
+		delete[] arr;
+		arr = newArr;
 	}
-	start = 0;
-	lengh++;
-	delete[] arr;
-	arr = newArr;
+
+
 }
 
 Client Queue::pop()
@@ -81,10 +113,24 @@ Client Queue::pop()
 	{
 		Client temp = arr[start];
 		start++;
+		if (start % 2 == 0)
+		{
+			Client* newArr = new Client[size - 2];
+
+			for (int i = start, k = 0; i < lengh; i++, k++)
+			{
+				newArr[k] = arr[i];
+			}
+			start = 0;
+			size -= 2;
+			lengh -= 2;
+			delete[] arr;
+			arr = newArr;
+		}
 		return temp;
 	}
 	else {
-		throw invalid_argument("error while poping");
+		throw runtime_error("error while poping");
 	}
 }
 
@@ -92,6 +138,7 @@ Client Queue::peek()
 {
 	return arr[start];
 }
+
 
 
 ostream& operator<<(ostream& out, Queue& queue)
