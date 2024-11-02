@@ -6,10 +6,9 @@ using namespace std;
 
 class Figures {
 public:
-	friend ostream& operator << (ostream& wiwod, Figures& figure) {
-		wiwod << "Welcome to the club Buddy, I'm: ";
-		return wiwod;
-	}
+	virtual string toString() = 0;
+	//virtual friend ostream& operator << (ostream& wiwod, Figures& figure)  = 0;
+
 	virtual float Area() = 0;
 
 	virtual float Perimetr() = 0;
@@ -33,8 +32,10 @@ public:
 		this->Angle = angle;
 	}
 
+	string toString() { return "Rect"; }
+
 	friend ostream& operator << (ostream& wiwod, Paralelogram& paralel) {
-		wiwod << static_cast<Figures&>(paralel);
+		//wiwod << static_cast<Figures&>(paralel);
 		wiwod << "Paralelogram";
 		wiwod << paralel.SideA;
 		wiwod << ";";
@@ -60,7 +61,7 @@ public:
 	Rectangle(int sideA, int sideB) : Paralelogram(sideA, sideB, 90) {}
 
 	friend ostream& operator <<(ostream& wiwod, Rectangle& rectangle) {
-		wiwod << static_cast<Figures&>(rectangle);
+		//wiwod << static_cast<Figures&>(rectangle);
 		wiwod << "Rectangle";
 		wiwod << rectangle.SideA;
 		wiwod << ";";
@@ -76,7 +77,7 @@ public:
 	Romb(int sideA, int angle) : Paralelogram(sideA, sideA, angle) {}
 
 	friend ostream& operator <<(ostream& wiwod, Romb& romb) {
-		wiwod << static_cast<Figures&>(romb);
+		//wiwod << static_cast<Figures&>(romb);
 		wiwod << "Romb";
 		wiwod << romb.SideA;
 		wiwod << ";";
@@ -93,7 +94,7 @@ public:
 	Square(int sideA) : Rectangle(sideA, sideA) {}
 
 	friend ostream& operator <<(ostream& wiwod, Square& square) {
-		wiwod << static_cast<Figures&>(square);
+		//wiwod << static_cast<Figures&>(square);
 		wiwod << "Square";
 		wiwod << square.SideA;
 		wiwod << ";";
@@ -118,15 +119,15 @@ public:
 		this->angle = Angle;
 	}
 
-	string toString(const string& name) {
-		string ret = " im triangle " + name + "\nside A " + to_string(this->sideA) + "\nSide B: " + to_string(this->sideB) + "\nAngle: " + to_string(angle);
+	string toString() {
+		string ret = " im triangle\nside A " + to_string(this->sideA) + "\nSide B: " + to_string(this->sideB) + "\nAngle: " + to_string(angle);
 		return ret;
 
 	}
 
 	friend ostream& operator<<(ostream& out, Triangle& triangle) {
-		out << static_cast<Figures&>(triangle);
-		out << triangle.toString("ABC");
+		//out << static_cast<Figures&>(triangle);
+		out << triangle.toString();
 
 		return out;
 	}
@@ -149,47 +150,104 @@ public:
 	RectangularTriangle(int sideA, int sideB) : Triangle(sideA, sideB, 90) {};
 };
 
+class D3Figure {
+public:
+	friend ostream& operator<<(ostream& out, D3Figure& figure) {
+		out << "Welcome to the club Buddy, I'm: ";
+		return out;
+	}
+
+	virtual double Volume() = 0;
+
+	virtual double fullArea() = 0;
+};
+
+class Paralelepiped : public D3Figure, private Paralelogram
+{
+private:
+	int height;
+public:
+	Paralelepiped() : Paralelogram() {
+		this->height = 1;
+	}
+	Paralelepiped(int sideA, int sideB, int angle, int Height): Paralelogram(sideA, sideB, angle) {
+		this->height = Height;
+	}
+
+	double fullArea() {
+		double ret = (Perimetr() * this->height) + (Area() * 2);
+		return ret;
+	}
+
+	double Volume() {
+		double ret = Area() * this->height;
+		return ret;
+	}
+
+	friend ostream& operator<<(ostream& out, Paralelepiped& para) {
+		out << static_cast<D3Figure&>(para) << " Paralelepiped\n" << endl;
+		out << static_cast<Paralelogram&>(para) << endl;
+		out << para.height << endl;
+
+		return out;
+	}
+
+};
+
+class Cube : public Paralelepiped {
+public:
+	Cube() : Paralelepiped(1, 1, 90, 1) {};
+	Cube(int side) : Paralelepiped(side, side, 90, side) {};
+
+};
+
+class Piramida: public D3Figure {
+private:
+	int height;
+	Figures* figura;
+public:
+	Piramida(int H, Figures* F) {
+		this->height = H;
+		this->figura = F;
+	}
+
+	double fullArea() {
+		return 0;
+	}
+
+	double Volume() {
+		double ret = (1. / 3.) * this->height * this->figura->Area();
+
+		return ret;
+	}
+
+	friend ostream& operator<<(ostream& out, Piramida& pir) {
+		out << static_cast<D3Figure&>(pir) << endl;
+		out << pir.figura->toString() << endl;
+		out << pir.height << endl;
+
+		return out;
+	}
+
+};
+
+class TrianglePiramida: public Piramida {
+public:
+	TrianglePiramida(int sideA, int sideB, int angle, int H) : Piramida(H, new Triangle(sideA, sideA, angle)){}
+
+
+};
+
+class Piramida4 : public Piramida {
+public:
+	Piramida4(int sideA, int sideB, int angle, int H) : Piramida(H, new Paralelogram(sideA, sideA, angle)) {}
+
+
+};
+
 int main() {
-	Paralelogram newParalel(2, 8, 60);
-	cout << newParalel.Area();
-	cout << endl;
-	cout << newParalel.Perimetr();
-	cout << endl;
-	cout << newParalel;
-	cout << endl;
-	Rectangle newRectangle(4, 10);
-	cout << newRectangle.Area();
-	cout << endl;
-	cout << newRectangle.Perimetr();
-	cout << endl;
-	cout << newRectangle;
-	cout << endl;
 
-	Romb newRomb(4, 60);
-	cout << newRomb.Area();
-	cout << endl;
-	cout << newRomb.Perimetr();
-	cout << endl;
-	cout << newRomb;
-	cout << endl;
-
-	Square newSquare(4);
-	cout << newSquare.Area();
-	cout << endl;
-	cout << newSquare.Perimetr();
-	cout << endl;
-	cout << newSquare;
-	cout << endl;
-
-	cout << endl;
-	Triangle newTriangle(2, 2, 45);
-	cout << newTriangle << endl;
-	cout << newTriangle.Area() << endl;
-	cout << newTriangle.Perimetr() << endl;
-
-	cout << endl;
-	RectangularTriangle recTri(3, 4);
-	cout << recTri << endl;
-	cout << recTri.Area() << endl;
-	cout << recTri.Perimetr() << endl;
+	Piramida4 pir(2, 2, 45, 2);
+	cout << pir << endl;
+	cout << pir.Volume() << endl;
 }
