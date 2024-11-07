@@ -162,31 +162,35 @@ public:
 	virtual double fullArea() = 0;
 };
 
-class Paralelepiped : public D3Figure, private Paralelogram
+class Paralelepiped : public D3Figure
 {
 private:
 	int height;
+	Paralelogram figura;
+
 public:
-	Paralelepiped() : Paralelogram() {
+	Paralelepiped() {
 		this->height = 1;
+		this->figura = Paralelogram(1, 1, 90);
 	}
-	Paralelepiped(int sideA, int sideB, int angle, int Height): Paralelogram(sideA, sideB, angle) {
+	Paralelepiped(Paralelogram Figura, int Height) {
 		this->height = Height;
+		this->figura = Figura;
 	}
 
 	double fullArea() {
-		double ret = (Perimetr() * this->height) + (Area() * 2);
+		double ret = (this->figura.Perimetr() * this->height) + (this->figura.Area() * 2);
 		return ret;
 	}
 
 	double Volume() {
-		double ret = Area() * this->height;
+		double ret = this->figura.Area() * this->height;
 		return ret;
 	}
 
 	friend ostream& operator<<(ostream& out, Paralelepiped& para) {
 		out << static_cast<D3Figure&>(para) << " Paralelepiped\n" << endl;
-		out << static_cast<Paralelogram&>(para) << endl;
+		out << para.figura << endl;
 		out << para.height << endl;
 
 		return out;
@@ -196,12 +200,12 @@ public:
 
 class Cube : public Paralelepiped {
 public:
-	Cube() : Paralelepiped(1, 1, 90, 1) {};
-	Cube(int side) : Paralelepiped(side, side, 90, side) {};
+	Cube() : Paralelepiped(Paralelogram(1, 1, 90), 1) {};
+	Cube(int side) : Paralelepiped(Paralelogram(side, side, 90), side) {};
 
 };
 
-class Piramida: public D3Figure {
+class Piramida : public D3Figure {
 private:
 	int height;
 	Figures* figura;
@@ -231,9 +235,9 @@ public:
 
 };
 
-class TrianglePiramida: public Piramida {
+class TrianglePiramida : public Piramida {
 public:
-	TrianglePiramida(int sideA, int sideB, int angle, int H) : Piramida(H, new Triangle(sideA, sideA, angle)){}
+	TrianglePiramida(int sideA, int sideB, int angle, int H) : Piramida(H, new Triangle(sideA, sideA, angle)) {}
 
 
 };
@@ -250,4 +254,8 @@ int main() {
 	Piramida4 pir(2, 2, 45, 2);
 	cout << pir << endl;
 	cout << pir.Volume() << endl;
+
+
+	Paralelepiped tryPara(Paralelogram(2, 3, 45), 3);
+	cout << tryPara << endl;
 }
