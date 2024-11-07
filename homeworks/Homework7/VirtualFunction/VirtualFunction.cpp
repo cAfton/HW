@@ -5,39 +5,63 @@
 using namespace std;
 
 class File {
-    ofstream filesName;
-
 public:
-    File(string path) {
-        this->filesName.open(path);
 
-        if (!this->filesName.is_open())
+    void openFile(ifstream& file, string path) {
+        file.open(path);
+    }
+
+    void closeFile(ifstream& file) {
+        file.close();
+    }
+
+    virtual void Display(string path) {
+        ifstream file;
+
+        openFile(file, path);
+        string line;
+        while (!file.eof())
         {
-            throw runtime_error("");
+            getline(file, line);
+            cout << line << endl;
         }
+
+        closeFile(file);
     }
 
-    virtual void Display(string path) = 0;
-
-    ~File() {
-        if (this->filesName.is_open()) {
-            this->filesName.close();
-        }
-    }
 
 };
 
-class FIleASCII : public File {
+class FileASCII : public File {
 public:
-    FIleASCII(string path) : File(path) {}
 
-    void Display(string path) {
-        cout << 
+    void Display(string path) override { 
+        ifstream file;
+
+        openFile(file, path);
+        string line;
+
+        while (!file.eof())
+        {
+            getline(file, line);
+            for (size_t i = 0; i < line.length(); i++)
+            {
+                cout << static_cast<int>(line[i]) << " ";
+            }
+            cout << endl;
+        }
+
+        closeFile(file);
     }
 };
 
 int main()
 {
-    
-    std::cout << "Hello World!\n";
+    File workWithFiles;
+    FileASCII workWithFilesASCII;
+    //FileDuoble workWithFilesDouble;
+    string path = "test.txt";
+
+    workWithFiles.Display(path);
+    workWithFilesASCII.Display(path);
 }
