@@ -2,13 +2,13 @@
 #include "Pet.h"
 
 class Cat : public Pet {
-	int activity; // energy level
+	double activity; // energy level
 public:
 	Cat() : Pet() {
 		this->activity = 0;
 	}
 
-	Cat(string name, int age, int activity) : Pet(name, age) {
+	Cat(string name, int age, double activity) : Pet(name, age) {
 		this->activity = activity;
 	}
 

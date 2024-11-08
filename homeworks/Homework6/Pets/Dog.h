@@ -16,6 +16,8 @@ public:
 
 	void Eat(string food);
 
+	void Guard(int hours);
+
 	int Intelligence();
 
 	friend ostream& operator<<(ostream& out, Dog& dog);

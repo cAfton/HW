@@ -4,7 +4,12 @@
 
 int main()
 {
-	Parrot parrot("Chuya", 1, 0);
+	string* words = new string[3];
+	words[0] = "Chuya";
+	words[1] = "Hi";
+	words[2] = "Eat!";
+
+	Parrot parrot("Chuya", 1, 3, words);
 	Dog dog("Boni", 7, 4);
 	Cat cat("Musia", 10, 6);
 
@@ -15,6 +20,8 @@ int main()
 	cout << endl;
 	cout << endl;
 
+	cout << "talks: " << endl;
+	parrot.Talk();
 	parrot.Eat("seed");
 	parrot.Sleep(12);
 	cout << "Parrot: " << parrot.Intelligence() << endl;

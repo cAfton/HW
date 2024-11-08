@@ -3,12 +3,19 @@
 void Cat::Sleep(int hours)
 {
 	cout << "Your cat has slept for " << hours << " hours" << endl;
+	if (this->activity + (hours / 15) < 10)
+	{
+		this->activity += hours / 15;
+	}
 }
 
 void Cat::Eat(string food)
 {
 	cout << "Your cat eat " << food << endl;
-
+	if (this->activity + 1 < 10)
+	{
+		this->activity += 1;
+	}
 }
 
 int Cat::Intelligence()

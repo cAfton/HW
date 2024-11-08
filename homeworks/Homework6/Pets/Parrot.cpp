@@ -1,5 +1,36 @@
 #include "Parrot.h"
 
+void Parrot::learnedNewWord(string word)
+{
+	if (this->wordsList != nullptr)
+	{
+		string* temp = new string[this->words + 1];
+		for (size_t i = 0; i < this->words; i++)
+		{
+			temp[i] = this->wordsList[i];
+		}
+		temp[this->words] = word;
+
+		delete[] wordsList;
+		this->wordsList = temp;
+		words++;
+	}
+	else {
+		this->words++;
+		this->wordsList = new string[words];
+		this->wordsList[words - 1] = word;
+
+	}
+}
+
+void Parrot::Talk()
+{
+	for (size_t i = 0; i < this->words; i++)
+	{
+		cout << this->wordsList[i] << endl;
+	}
+}
+
 void Parrot::Sleep(int hours)
 {
 	cout << "Your parrot has slept for " << hours << " hours" << endl;
