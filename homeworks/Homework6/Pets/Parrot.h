@@ -12,20 +12,11 @@ public:
 		this->words = words;
 	}
 
-	void Sleep(int hours) {
-		cout << "Your parrot has slept for " << hours << " hours" << endl;
-	}
+	void Sleep(int hours);
 
-	void Eat(string food) {
-		cout << "Your parrot eat " << food << endl;
-	}
+	void Eat(string food);
 
-	int Intelligence() {
-		return (getAge() * 10) + words; //let it be
-	}
+	int Intelligence();
 
-	friend ostream& operator<<(ostream& out, Parrot& parrot) {
-		out << static_cast<Pet&>(parrot) << "\nKnow " << parrot.words << " words";
-		return out;
-	}
+	friend ostream& operator<<(ostream& out, Parrot& parrot);
 };

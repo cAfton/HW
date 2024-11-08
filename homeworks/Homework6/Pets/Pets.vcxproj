@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Parrot.cpp" />
     <ClCompile Include="Pet.cpp" />
     <ClCompile Include="Pets.cpp" />
   </ItemGroup>
