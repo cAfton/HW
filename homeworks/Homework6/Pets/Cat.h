@@ -12,20 +12,12 @@ public:
 		this->activity = activity;
 	}
 
-	void Sleep(int hours) {
-		cout << "Your cat has slept for " << hours << " hours" << endl;
-	}
+	void Sleep(int hours); 
 
-	void Eat(string food) {
-		cout << "Your cat eat " << food << endl;
-	}
 
-	int Intelligence() {
-		return getAge() + activity; //let it be
-	}
+	void Eat(string food);
 
-	friend ostream& operator<<(ostream& out, Cat& cat) {
-		out << static_cast<Pet&>(cat) << "\nEnergy level: " << cat.activity << "/10";
-		return out;
-	}
+	int Intelligence();
+
+	friend ostream& operator<<(ostream& out, Cat& cat);
 };
