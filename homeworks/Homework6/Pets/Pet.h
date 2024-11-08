@@ -8,19 +8,11 @@ class Pet
 	string name;
 	int age;
 public:
-	Pet() {
-		this->name = "a cool name";
-		this->age = 1;
-	}
+	Pet();
 
-	Pet(string name, int age) {
-		this->name = name;
-		this->age = age;
-	}
+	Pet(string name, int age);
 
-	int getAge() {
-		return this->age;
-	}
+	int getAge();
 
 	virtual void Sleep(int hours) = 0;
 
@@ -28,9 +20,6 @@ public:
 
 	virtual int Intelligence() = 0;
 
-	friend ostream& operator<<(ostream& out, Pet& pet) {
-		out << "Name: " << pet.name << "\nAge: " << pet.age << " years";
-		return out;
-	}
+	friend ostream& operator<<(ostream& out, Pet& pet);
 
 };
