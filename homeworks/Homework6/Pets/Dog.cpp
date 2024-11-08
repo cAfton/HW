@@ -12,7 +12,9 @@ void Dog::Eat(string food)
 
 void Dog::Guard(int hours)
 {
-	cout << "your dog has guarded you for " << hours << " hours. " << (rand() % 11 < this->guarding_qualities ? "Your dog guarded you well" : "Your dog didn't manage to guard you") << endl;
+	srand(time(NULL));
+	int r = rand() % 11;
+	cout << "your dog has guarded you for " << hours << " hours. " << (r < this->guarding_qualities ? "Your dog guarded you well" : "Your dog didn't manage to guard you") << endl;
 }
 
 int Dog::Intelligence()

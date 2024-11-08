@@ -31,6 +31,7 @@ int main()
 
 	dog.Eat("feed");
 	dog.Sleep(10);
+	dog.Guard(5);
 	cout << "Dog: " << dog.Intelligence() << endl;
 
 	cout << endl;
