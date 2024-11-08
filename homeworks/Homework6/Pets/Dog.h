@@ -12,20 +12,11 @@ public:
 		this->guarding_qualities = guarding_qualities;
 	}
 
-	void Sleep(int hours) {
-		cout << "Your dog has slept for " << hours << " hours" << endl;
-	}
+	void Sleep(int hours);
 
-	void Eat(string food) {
-		cout << "Your dog eat " << food << endl;
-	}
+	void Eat(string food);
 
-	int Intelligence() {
-		return getAge() + guarding_qualities; //let it be
-	}
+	int Intelligence();
 
-	friend ostream& operator<<(ostream& out, Dog& dog) {
-		out << static_cast<Pet&>(dog) << "\nCan guard you: " << dog.guarding_qualities << "/10";
-		return out;
-	}
+	friend ostream& operator<<(ostream& out, Dog& dog);
 };
