@@ -1,22 +1,21 @@
 #pragma once
+#include <iostream>
 #include <string>
 
 using namespace std;
 
 class Employer {
-private:
 	string name;
 	int age;
+	static string workPlace;
 public:
-	Employer() {
-		this->name = "Anton";
-		this->age = 3;
-	}
+	Employer();
 
-	Employer(string Name, int Age) {
-		this->name = Name;
-		this->age = Age;
-	}
+	Employer(string Name, int Age);
 
 	virtual string Print() = 0;
+
+	virtual void Work(int works) = 0;
+
+	friend ostream& operator<<(ostream& out, Employer& emp);
 };
