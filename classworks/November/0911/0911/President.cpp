@@ -8,7 +8,7 @@ string President::Print()
 
 void President::Work(int works)
 {
-	cout << "I'm working for " << works << endl;
+	cout << "President is working for " << works << endl;
 	this->gold += (works / 100.);
 }
 

@@ -9,8 +9,8 @@ string Worker::Print()
 
 void Worker::Work(int works)
 {
-	cout << "I'm working for " << works << endl;
-	this->bronze += (works / 100);
+	cout << "Worker is working for " << works << endl;
+	this->bronze += (works / 300.);
 }
 
 ostream& operator<<(ostream& out, Worker& worker)

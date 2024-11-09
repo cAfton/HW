@@ -9,8 +9,8 @@ string Manager::Print()
 void Manager::Work(int works)
 {
 
-    cout << "I'm working for " << works << endl;
-    this->silver += (works / 100);
+    cout << "Manager is working for " << works << endl;
+    this->silver += (works / 200.);
 }
 
 ostream& operator<<(ostream& out, Manager& man)

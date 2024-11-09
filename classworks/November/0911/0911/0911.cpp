@@ -14,4 +14,22 @@ int main()
 	cout << manager << endl;
 	cout << worker << endl;
 
+
+	Employer** allWorkers = new Employer*[3];
+
+	cout << "////////////" << endl;
+
+	allWorkers[0] = &president;
+	allWorkers[1] = &manager;
+	allWorkers[2] = &worker;
+
+	for (size_t i = 0; i < 3; i++)
+	{
+		allWorkers[i]->Work(8 - (2 * i));
+	}
+
+	for (size_t i = 0; i < 3; i++)
+	{
+		cout << allWorkers[i]->Print() << endl;
+	}
 }
