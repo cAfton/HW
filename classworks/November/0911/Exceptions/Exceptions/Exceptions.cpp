@@ -1,6 +1,18 @@
-#include <iostream>
+#include "StrToInt.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	string number;
+	while(true)
+	{
+
+		cin >> number;
+
+		try {
+			cout << StrToInt::doWork(number) << endl;
+		}
+		catch (out_of_range er) {
+			cout << er.what() << endl;
+		}
+	}
 }
