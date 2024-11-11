@@ -15,24 +15,27 @@ class Car {
 	int carNumber;
 	Offenses* offense;
 	int size;
-
+	int length;
 public:
 	Car() {
 		this->carNumber = 1000;
 		this->size = 0;
-		this->offense = new Offenses[size];
+		this->length = 0;
+		this->offense = nullptr;
 	}
 
-	Car(int number, int size, Offenses* offense) {
+	Car(int number, int size, int length, Offenses* offense) {
 		this->carNumber = number;
 		this->size = size;
 		this->offense = offense;
+		this->length = length;
 	}
 
 	Car(int number) {
 		this->carNumber = number;
 		this->size = 0;
-		this->offense = new Offenses[size];
+		this->length = 0;
+		this->offense = nullptr;
 	}
 
 
@@ -45,16 +48,35 @@ public:
 	}
 
 	void addOffense(Offenses newOffense) {
-		Offenses* temp = new Offenses[size + 1];
-		for (size_t i = 0; i < size; i++)
+		if (this->offense != nullptr)
 		{
-			temp[i] = offense[i];
+			if (this->length < this->size)
+			{
+				this->offense[this->length] = newOffense;
+				this->length++;
+			}
+			else {
+				Offenses* temp = new Offenses[size * 2];
+				for (size_t i = 0; i < size; i++)
+				{
+					temp[i] = offense[i];
+				}
+				temp[this->length] = newOffense;
+				this->length++;
+				delete[] offense;
+				offense = temp;
+				size *= 2;
+			}
+			
 		}
-		temp[size] = newOffense;
-		delete[] offense;
-		offense = temp;
-		size++;
+		else {
+			this->size = 10; 
+			this->offense = new Offenses[this->size];
+			this->offense[this->length] = newOffense;
+			this->length++;
+		}
 	}
+	
 
 	friend ostream& operator<<(ostream& out, Car car) {
 		out << "\nCar number: " << car.carNumber << endl;
@@ -82,7 +104,7 @@ public:
 				break;
 			}
 		}
-		out << "\nTotal " << car.size << " offenses" << endl;
+		out << "\nTotal " << car.length << " offenses" << endl;
 
 		return out;
 	}
@@ -161,6 +183,8 @@ private:
 			}
 		}
 
+		
+
 		Car& find(int numToFind) {
 			if (numToFind > this->elem.getNumber())
 			{
@@ -220,6 +244,8 @@ public:
 		}
 	}
 
+
+
 	friend ostream& operator<<(ostream& out, Tree copy) {
 		if (copy.Root != nullptr)
 		{
@@ -237,6 +263,37 @@ public:
 
 
 };
+//
+//Car addNewOffense(Car*& add, int carNum, bool& toAdd) {
+//	int choise;
+//	
+//	return newCar;
+//}
+
+void addAOffense(Car& car, bool& toAdd, int choise) {
+	switch (choise)
+	{
+	case 1:
+		car.addOffense(speeding);
+		break;
+	case 2:
+		car.addOffense(illegal_parking);
+		break;
+	case 3:
+		car.addOffense(running_a_red_light);
+		break;
+	case 4:
+		car.addOffense(no_seatbelt);
+		break;
+	case 5:
+		car.addOffense(phone_use_while_driving);
+		break;
+	default:
+		toAdd = false;
+		cout << "wrong choose" << endl;
+		break;
+	}
+}
 
 
 int main() {
@@ -251,63 +308,24 @@ int main() {
 		system("cls");
 		if (userChoise == 1)
 		{
+			bool add = true;
 			int carNum;
+			int choise;
 			cout << "Enter car number: ";
 			cin >> carNum;
 			cout << endl;
 			try {
 				Car& temp = DAI.find(carNum);
 				cout << "1 - speeding\n2 - illegal_parking\n3 - running_a_red_light\n4 - no_seatbelt\n5 - phone_use_while_driving\n" << endl;
-				cin >> userChoise;
-				switch (userChoise)
-				{
-				case 1:
-					temp.addOffense(speeding);
-					break;
-				case 2:
-					temp.addOffense(illegal_parking);
-					break;
-				case 3:
-					temp.addOffense(running_a_red_light);
-					break;
-				case 4:
-					temp.addOffense(no_seatbelt);
-					break;
-				case 5:
-					temp.addOffense(phone_use_while_driving);
-					break;
-				default:
-					cout << "wrong choose" << endl;
-					break;
-				}
+				cin >> choise;
+				addAOffense(temp, add, choise);
+				
 			}
 			catch (exception) {
 				Car newCar(carNum);
-				bool add = true;
 				cout << "1 - speeding\n2 - illegal_parking\n3 - running_a_red_light\n4 - no_seatbelt\n5 - phone_use_while_driving\n" << endl;
-				cin >> userChoise;
-				switch (userChoise)
-				{
-				case 1:
-					newCar.addOffense(speeding);
-					break;
-				case 2:
-					newCar.addOffense(illegal_parking);
-					break;
-				case 3:
-					newCar.addOffense(running_a_red_light);	
-					break;
-				case 4:
-					newCar.addOffense(no_seatbelt);
-					break;
-				case 5:
-					newCar.addOffense(phone_use_while_driving);
-					break;
-				default:
-					add = false;
-					cout << "wrong choose" << endl;
-					break;
-				}
+				cin >> choise;
+				addAOffense(newCar, add, choise);
 				if (add)
 				{
 					DAI.Add(newCar);
@@ -323,7 +341,7 @@ int main() {
 			int numFind;
 			cout << "enter number to find: ";
 			cin >> numFind;
-			system("cls");
+			cout << endl;
 			try {
 				cout << DAI.find(numFind) << endl;
 			}
@@ -331,6 +349,7 @@ int main() {
 				cout << "nothing found" << endl;
 			}
 			system("pause");
+			system("cls");
 
 		}
 	}
