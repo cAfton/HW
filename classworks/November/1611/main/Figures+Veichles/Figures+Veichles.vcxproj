@@ -136,6 +136,7 @@
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Elem.h" />
     <ClInclude Include="Figures.h" />
+    <ClInclude Include="Horse.h" />
     <ClInclude Include="IFileLoader.h" />
     <ClInclude Include="RC.h" />
     <ClInclude Include="Vehicle.h" />
