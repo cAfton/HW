@@ -29,5 +29,8 @@
     <ClInclude Include="IFileLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Elem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,10 +1,10 @@
 #pragma once
-#include "IFileLoader.h"
+#include "Elem.h"
 
 
 using namespace std;
 
-class Vehicle : public IFileSaver{
+class Vehicle : public Elem{
 protected:
 	int max_speed;
 	int distance;

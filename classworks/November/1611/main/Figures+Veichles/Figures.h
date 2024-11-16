@@ -1,9 +1,9 @@
 #pragma once
-#include "IFileLoader.h"
+#include "Elem.h"
 
 using namespace std;
 
-class Figures : public IFileSaver {
+class Figures : public Elem {
 public:
 	virtual string Print() = 0;
 

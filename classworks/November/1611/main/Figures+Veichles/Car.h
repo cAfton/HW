@@ -2,7 +2,6 @@
 #include "Vehicle.h"
 #include <fstream>
 
-
 using namespace std;
 
 class Car : public Vehicle {
@@ -13,7 +12,7 @@ public:
 		this->color = "color";
 	}
 
-	Car(int speed, int dis, int weig, int hp, int col) : Vehicle(speed, dis, weig) {
+	Car(int speed, int dis, int weig, int hp, string col) : Vehicle(speed, dis, weig) {
 		this->color = col;
 		this->hp = hp;
 	}
@@ -22,8 +21,8 @@ public:
 		cout << ">:3" << endl;
 	};
 
-	void printInFile() {
-		ofstream file(fileName);
+	void printInFile(string filePath) override {
+		ofstream file(filePath, ios::app);
 		if (!file.is_open())
 		{
 			return;
@@ -37,6 +36,25 @@ public:
 		file << this->hp << endl;
 
 		file.close();
+	}
+
+	Car* read(ifstream& file) override {
+		Car* newCar = new Car;
+		string read;
+		getline(file, read);
+		newCar->max_speed = stoi(read);
+
+		getline(file, read);
+		newCar->distance = stoi(read);
+
+		getline(file, read);
+		newCar->weight = stoi(read);
+
+		getline(file, newCar->color);
+
+		getline(file, read);
+		newCar->hp = stoi(read);
+		return newCar;
 	}
 
 	friend ostream& operator<<(ostream& out, Car& car) {

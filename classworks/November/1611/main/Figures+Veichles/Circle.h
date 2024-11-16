@@ -28,8 +28,8 @@ public:
 
 	}
 
-	void printInFile() {
-		ofstream file(fileName);
+	void printInFile(string filePath) {
+		ofstream file(filePath, ios::app);
 		if (!file.is_open())
 		{
 			return;
@@ -41,6 +41,36 @@ public:
 		file << this->Y << endl;
 
 		file.close();
+	}
+
+	/*void printFromFile(ifstream& file, vector<IFileLoader*>& v) override {
+		string read;
+		getline(file, read);
+		this->R = stoi(read);
+
+		getline(file, read);
+		this->X = stoi(read);
+
+		getline(file, read);
+		this->Y = stoi(read);
+
+		v.push_back(this);
+
+	}*/
+
+	Circle* read(ifstream& file) {
+		Circle* newCircle = new Circle;
+		string read;
+		getline(file, read);
+		newCircle->R = stoi(read);
+
+		getline(file, read);
+		newCircle->X = stoi(read);
+
+		getline(file, read);
+		newCircle->Y = stoi(read);
+
+		return newCircle;
 	}
 
 	void Save(string path) {

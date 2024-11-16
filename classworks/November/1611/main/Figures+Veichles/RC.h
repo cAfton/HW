@@ -1,7 +1,7 @@
 #pragma once
-#include "IFileLoader.h"
+#include "Elem.h"
 
-class RC : public IFileSaver {
+class RC : public Elem {
 	int numOfSquares;
 	int numOfFaces;
 	bool isCollected;
@@ -17,8 +17,8 @@ public:
 		this->isCollected = iC;
 	}
 
-	void printInFile() {
-		ofstream file(fileName);
+	void printInFile(string filePath) {
+		ofstream file(filePath, ios::app);
 		if (!file.is_open())
 		{
 			return;
@@ -29,6 +29,36 @@ public:
 		file << this->isCollected << endl;
 
 		file.close();
+	}
+
+	/*void printFromFile(ifstream& file, vector<IFileLoader*>& v) override {
+		string read;
+
+		getline(file, read);
+		this->numOfSquares = stoi(read);
+
+		getline(file, read);
+		this->numOfFaces = stoi(read);
+
+		getline(file, read);
+		this->isCollected = stoi(read);
+
+		v.push_back(this);
+	}*/
+
+	RC* read(ifstream& file) {
+		RC* newRc = new RC;
+		string read;
+		getline(file, read);
+		newRc->numOfSquares = stoi(read);
+
+		getline(file, read);
+		newRc->numOfFaces = stoi(read);
+
+		getline(file, read);
+		newRc->isCollected = stoi(read);
+
+		return newRc;
 	}
 
 	bool IsCollected() {

@@ -131,6 +131,7 @@
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Elem.h" />
     <ClInclude Include="IFileLoader.h" />
     <ClInclude Include="RC.h" />
   </ItemGroup>
