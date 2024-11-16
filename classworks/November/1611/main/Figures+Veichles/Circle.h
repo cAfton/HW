@@ -1,5 +1,8 @@
 #pragma once
 #include "Figures.h"
+#include <fstream>
+
+
 
 
 class Circle : public Figures {
@@ -23,6 +26,21 @@ public:
 		string ret = "Circle: " + to_string(this->R) + "\tCordinates (" + to_string(this->X) + "; " + to_string(this->Y) + ")";
 		return ret;
 
+	}
+
+	void printInFile() {
+		ofstream file(fileName);
+		if (!file.is_open())
+		{
+			return;
+		}
+
+		file << "Circle: " << endl;
+		file << this->R << endl;
+		file << this->X << endl;
+		file << this->Y << endl;
+
+		file.close();
 	}
 
 	void Save(string path) {

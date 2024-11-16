@@ -25,6 +25,25 @@ public:
 		cout << ">:3" << endl;
 	}
 
+	void printInFile() {
+		ofstream File(fileName);
+		if (!File.is_open())
+		{
+			return;
+		}
+
+		File << "Bus: " << endl;
+		File << this->max_speed << endl;
+		File << this->distance << endl;
+		File << this->weight << endl;
+		File << this->BusNumber << endl;
+		File << this->RouteNumber << endl;
+		File << this->sits << endl;
+		File << this->Driver << endl;
+
+		File.close();
+	}
+
 	friend ostream& operator<<(ostream& wiwod, Buss Bus) {
 		wiwod << static_cast<Car&>(Bus) << "Bus Number: " << Bus.BusNumber << "\nDriver: " << Bus.Driver << "\nRoute Number: " << Bus.RouteNumber << "\nnum of sits: " << Bus.sits << " ";
 		return wiwod;

@@ -1,12 +1,15 @@
 #pragma once
-#include <iostream>
+#include "IFileLoader.h"
+
+
 using namespace std;
 
-class Vehicle {
+class Vehicle : public IFileSaver{
+protected:
 	int max_speed;
 	int distance;
 	int weight;
-protected:
+
 	void setDis(int dis) {
 		this->distance = dis;
 	}

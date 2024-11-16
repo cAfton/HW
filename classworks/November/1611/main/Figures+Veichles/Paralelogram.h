@@ -1,5 +1,8 @@
 #pragma once
 #include "Figures.h"
+#include <fstream>
+
+
 
 class Paralelogram : public Figures {
 protected:

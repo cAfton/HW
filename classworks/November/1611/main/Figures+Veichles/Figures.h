@@ -1,13 +1,9 @@
 #pragma once
-#include <iostream>
-#include <cmath>
-#include <string>
-#include <fstream>
-
+#include "IFileLoader.h"
 
 using namespace std;
 
-class Figures {
+class Figures : public IFileSaver {
 public:
 	virtual string Print() = 0;
 
