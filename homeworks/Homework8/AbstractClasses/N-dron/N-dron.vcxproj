@@ -130,10 +130,12 @@
     <ClCompile Include="BaseClass.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="N-dron.cpp" />
+    <ClCompile Include="quadratic equations.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseClass.h" />
     <ClInclude Include="Line.h" />
+    <ClInclude Include="quadratic equations.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

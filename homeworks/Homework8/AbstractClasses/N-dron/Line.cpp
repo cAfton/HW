@@ -7,10 +7,10 @@ Line::Line(int a, int b) :roots(a, b){}
 
 void Line::calculation()
 {
-	if (isLogocal) {
+	if (isLogocal()) {
 		double x;
 		x = (-1 * B()) / A();
-		std::cout << "X = " << x << std::endl;
+		std::cout << "\nX = " << x << std::endl;
 	}
 }
 
