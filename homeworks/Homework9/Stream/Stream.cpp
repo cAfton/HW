@@ -1,6 +1,6 @@
-#include <iostream>
+#include "Handbook.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	Handbook hand;
 }

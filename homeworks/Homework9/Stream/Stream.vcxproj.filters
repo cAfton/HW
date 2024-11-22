@@ -18,5 +18,19 @@
     <ClCompile Include="Stream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Handbook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Company.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Handbook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Company.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
