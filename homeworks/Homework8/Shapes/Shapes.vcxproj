@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Paralelogram.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Shapes.cpp" />
+    <ClCompile Include="Square.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Circle.h" />
