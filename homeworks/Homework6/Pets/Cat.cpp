@@ -1,5 +1,15 @@
 #include "Cat.h"
 
+Cat::Cat() : Pet()
+{
+	this->activity = 0;
+}
+
+Cat::Cat(string name, int age, double activity)  : Pet(name, age)
+{
+	this->activity = activity;
+}
+
 void Cat::Sleep(int hours)
 {
 	cout << "Your cat has slept for " << hours << " hours" << endl;

@@ -5,18 +5,9 @@ class Parrot : public Pet {
 	int words; // how many words know
 	string* wordsList;
 public:
-	Parrot() : Pet() {
-		this->words = 0;
-		this->wordsList = nullptr;
-	}
+	Parrot();
 
-	Parrot(string name, int age, int words, string* list) : Pet(name, age) {
-		this->words = words;
-		this->wordsList = new string[words];
-		for (int i = 0; i < words; i++) {
-			this->wordsList[i] = list[i];
-		}
-	}
+	Parrot(string name, int age, int words, string* list);
 
 	void learnedNewWord(string word);
 

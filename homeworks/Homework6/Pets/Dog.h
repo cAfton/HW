@@ -4,13 +4,9 @@
 class Dog : public Pet {
 	int guarding_qualities; //dog's ability to guard its owners
 public:
-	Dog() : Pet() {
-		this->guarding_qualities = 0;
-	}
+	Dog();
 
-	Dog(string name, int age, int guarding_qualities) : Pet(name, age) {
-		this->guarding_qualities = guarding_qualities;
-	}
+	Dog(string name, int age, int guarding_qualities);
 
 	void Sleep(int hours);
 

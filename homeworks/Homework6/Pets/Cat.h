@@ -4,13 +4,9 @@
 class Cat : public Pet {
 	double activity; // energy level
 public:
-	Cat() : Pet() {
-		this->activity = 0;
-	}
+	Cat();
 
-	Cat(string name, int age, double activity) : Pet(name, age) {
-		this->activity = activity;
-	}
+	Cat(string name, int age, double activity);
 
 	void Sleep(int hours); 
 
