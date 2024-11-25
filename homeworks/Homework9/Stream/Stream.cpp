@@ -19,4 +19,6 @@ int main()
     cout << hand.findByDirector("Ethan Davis").getCompanyName() << endl;
     cout << hand.findByNumber(38012321010).getCompanyName() << endl;
     cout << hand.findByActivity("Tourism").getCompanyName() << endl;
+
+    
 }
