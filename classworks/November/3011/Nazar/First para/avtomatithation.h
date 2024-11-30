@@ -16,9 +16,7 @@ class train {
 public:
 	train();
 	train(string name, double time, string from, string end);
-	train(string line) {
-		
-	}
+	train(string line);
 
 	string print();
 

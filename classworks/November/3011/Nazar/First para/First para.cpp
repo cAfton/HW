@@ -7,6 +7,8 @@ ostream& operator<<(ostream& out, information& copy) {
 
 int main()
 {
+	information mainA;
+
 	ifstream file;
 	file.open("text.txt");
 	if (!file.is_open()) {
@@ -14,14 +16,10 @@ int main()
 	}
 	string line;
 	getline(file, line);
+	train one(line);
+	
+	mainA.add(one);
 
-
-
-	train one;
-	information mainS;
-	mainS.add(one);
-	information second;
-	second.add(one);
-
-	cout << mainS;
+	cout << mainA;
+	
 }
