@@ -5,9 +5,11 @@
 class Circle : public Figures {
 private:
 	int R;
+	int X;
+	int Y;
 public:
 	Circle();
-	Circle(int r);
+	Circle(int r, int x, int y);
 	string Print();
 
 	void Save(string path);

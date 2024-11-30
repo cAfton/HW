@@ -6,10 +6,12 @@ Paralelogram::Paralelogram() {
 	Angle = 45;
 }
 
-Paralelogram::Paralelogram(int sideA, int sideB, int angle) {
+Paralelogram::Paralelogram(int sideA, int sideB, int angle, int x, int y) {
 	this->SideA = sideA;
 	this->SideB = sideB;
 	this->Angle = angle;
+	this->X = x;
+	this->Y = y;
 }
 
 string Paralelogram::Print() {

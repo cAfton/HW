@@ -5,9 +5,11 @@ Circle::Circle()
 	this->R = 1;
 }
 
-Circle::Circle(int r)
+Circle::Circle(int r, int x, int y)
 {
 	this->R = r;
+	this->X = x;
+	this->Y = y;
 }
 
 string Circle::Print()
@@ -26,6 +28,8 @@ void Circle::Save(string path)
 	}
 
 	file << this->R << endl;
+	file << this->X << endl;
+	file << this->Y << endl;
 
 	file.close();
 
@@ -41,6 +45,12 @@ void Circle::Load(string path)
 	string save;
 	getline(file, save);
 	this->R = stoi(save);
+
+	getline(file, save);
+	this->X = stoi(save);
+
+	getline(file, save);
+	this->Y = stoi(save);
 }
 
 float Circle::Area()

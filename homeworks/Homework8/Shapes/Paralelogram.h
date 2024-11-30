@@ -10,7 +10,7 @@ protected:
 	int Y;
 public:
 	Paralelogram();
-	Paralelogram(int sideA, int sideB, int angle);
+	Paralelogram(int sideA, int sideB, int angle, int x, int y);
 
 
 	string Print();
