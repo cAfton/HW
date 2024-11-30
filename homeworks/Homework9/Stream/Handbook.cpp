@@ -40,6 +40,72 @@ void Handbook::addNew(Company addNew)
 	}
 }
 
+void Handbook::Save(string path) {
+	ofstream file;
+	file.open(path);
+
+	if (!file.is_open())
+	{
+		throw runtime_error("");
+	}
+
+	file << this->size << endl;
+	file << this->lenght << endl;
+
+	for (size_t i = 0; i < this->lenght; i++)
+	{
+		file << companies[i].getCompanyName() << endl;
+		file << companies[i].getDirector() << endl;
+		file << companies[i].getNumber() << endl;
+		file << companies[i].getAdress() << endl;
+		file << companies[i].getTypeOfActivity() << endl;
+	}
+
+	file.close();
+}
+
+void Handbook::Load(string path) {
+	ifstream file;
+	file.open(path);
+
+	if (!file.is_open())
+	{
+		throw runtime_error("");
+	}
+
+	string line;
+
+	getline(file, line);
+	this->size = stoi(line);
+	getline(file, line);
+	this->lenght = stoi(line);
+
+	Company* temp = new Company[size];
+
+	for (size_t i = 0; i < this->lenght; i++)
+	{
+		getline(file, line);
+		temp[i].setCompanyName(line);
+
+		getline(file, line);
+		temp[i].setDirector(line);
+
+		getline(file, line);
+		temp[i].setNumber(line);
+
+		getline(file, line);
+		temp[i].setAdress(line);
+
+		getline(file, line);
+		temp[i].setTypeOfActivity(line);
+
+	}
+
+	delete[] this->companies;
+	this->companies = temp;
+
+}
+
 Company Handbook::findByName(string name)
 {
 	for (size_t i = 0; i < this->lenght; i++)
@@ -49,6 +115,8 @@ Company Handbook::findByName(string name)
 			return this->companies[i];
 		}
 	}
+
+	throw runtime_error("");
 }
 
 Company Handbook::findByDirector(string director)
@@ -60,9 +128,12 @@ Company Handbook::findByDirector(string director)
 			return this->companies[i];
 		}
 	}
+
+	throw runtime_error("");
+
 }
 
-Company Handbook::findByNumber(long unsigned int num)
+Company Handbook::findByNumber(string num)
 {
 	for (size_t i = 0; i < this->lenght; i++)
 	{
@@ -71,15 +142,21 @@ Company Handbook::findByNumber(long unsigned int num)
 			return this->companies[i];
 		}
 	}
+
+	throw runtime_error("");
+
 }
 
 Company Handbook::findByActivity(string activity)
 {
 	for (size_t i = 0; i < this->lenght; i++)
 	{
-		if (this->companies[i].GetTypeOfActivity() == activity)
+		if (this->companies[i].getTypeOfActivity() == activity)
 		{
 			return this->companies[i];
 		}
 	}
+
+	throw runtime_error("");
+
 }

@@ -1,5 +1,7 @@
 #pragma once
 #include "Company.h"
+#include <fstream>
+#include <string>
 
 class Handbook
 {
@@ -14,11 +16,15 @@ public:
 
 	void addNew(Company addNew);
 
+	void Load(string path);
+
+	void Save(string path);
+
 	Company findByName(string name);
 
 	Company findByDirector(string director);
 	
-	Company findByNumber(long unsigned int num);
+	Company findByNumber(string num);
 	
 	Company findByActivity(string activity);
 };
