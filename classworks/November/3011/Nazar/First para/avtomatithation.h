@@ -1,38 +1,40 @@
 #pragma once
+#include <algorithm>
 #include <iostream>
 #include <vector>
-using namespace std;
+#include <string>
+#include <fstream>
 
+using namespace std;
 
 
 class train {
 	string name;
-	double dateTime;
+	double time;
 	string from;
 	string end;
 public:
 	train();
 	train(string name, double time, string from, string end);
+	train(string line) {
+		
+	}
 
 	string print();
 
-
-
 };
-
 
 class information
 {
 	vector<train> trains;
-	int number;
-	string meinStationName;
+	
 public:
 	information();
-	
+
 	void add(train newOne);
 
-	//ostream& operator<<(ostream& out, information& copy);
-	
-	~information();
+
+	friend ostream& operator<<(ostream& out, information& copy);
 };
+
 
