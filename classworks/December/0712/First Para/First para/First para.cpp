@@ -35,6 +35,11 @@ public:
 		this->name = name;
 		this->president = president;
 	}
+
+	string GetName() {
+		return this->name;
+	}
+
 	vector<City>& GetCities() {
 		return this->cities;
 	}
@@ -54,13 +59,21 @@ public:
 };
 
 
-void FindCity() {}
+void FindCities(vector<Country>& Countries) {
+	string countryName;
+	cout << "Enter the country name to find: ";
+	cin >> countryName;
+	auto tmp = find_if(Countries.begin(), Countries.end(), [&countryName](Country& elem) {return countryName == elem.GetName(); });
+	
+	for_each(tmp->GetCities().begin(), tmp->GetCities().end(), [](City city) {cout << city; });
+	
+}
 
-void ChangeName(vector<string>) {
+void ChangeName(vector<string>& Countries) {
 	string county;
 	cout << "Which city you`d like to change?";
 	cin >> county;
-
+	
 }
 
 void AddCityOrCounry() {
@@ -97,7 +110,7 @@ void NumberOfCities(vector<string>) {
 	string county;
 	cout << "Which counry`s number of cities you`d like to see?";
 	cin >> county;
-}
+}	
 
 void Delete(vector<string>) {
 	string name;
@@ -202,7 +215,7 @@ int main()
 	{
 		switch (choice) {
 		case 1:
-			FindCity();
+			FindCities(Countries);
 			break;
 
 		case 2:
