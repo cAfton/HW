@@ -2,20 +2,55 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
 class City {
 	string name;
-	string Mayor;
+	string mayor;
+public:
+	City(string name, string mayor) {
+		this->name = name;
+		this->mayor = mayor;
+	}
 
+	friend ostream& operator<<(ostream& out, City copy) {
+		out << "City`s name:" << copy.name << "\nMayor:" << copy.mayor << endl;
+		return out;
+	}
+
+	friend ofstream& operator<<(ofstream& out, City& copy) {
+		out << copy.name << ';' << copy.mayor << ':';
+		return out;
+	}
 };
 
 class Country {
 	string name;
 	string president;
 	vector<City> cities;
+public:
+	Country(string name, string president) {
+		this->name = name;
+		this->president = president;
+	}
+	vector<City>& GetCities() {
+		return this->cities;
+	}
 
+	friend ostream& operator<<(ostream& out, Country& copy) {
+		out << "Country`s name:" << copy.name << "\nPresident:" << copy.president << endl;
+		out << "Cities:\n";
+		for_each(copy.cities.begin(), copy.cities.end(), [&out](City city) {out << city << endl; });
+		return out;
+	}
+
+	friend ofstream& operator<<(ofstream& out, Country& copy) {
+		out << copy.name << ';' << copy.president << ';';
+		for_each(copy.cities.begin(), copy.cities.end(), [&out](City& city) {out << city; });
+		return out;
+	}
 };
 
 
@@ -91,20 +126,65 @@ void Delete(vector<string>) {
 	}
 }
 
-void readFromFile(fstream file, vector<Country> Countries) {
+void readFromFile(string filepath, vector<Country>& Countries) {
 	string line;
+	fstream file(filepath);
+
 	while (getline(file,line))
 	{
-		//line.
+		int pos = line.find(';'); //ЎукаЇмо першу ";"
+		string name = line.substr(0, pos); //«бер≥гаЇмо частину тексту в≥д початку до ";"
+		line.erase(0, pos + 1); //¬идал€Їмо збережений р€док з початкового тексту
+
+		pos = line.find(';');
+		string president = line.substr(0, pos);
+		line.erase(0, pos + 1);
+
+		Country tmpCo(name, president);
+
+
+		while (line.find(':')!= string::npos)
+		{
+
+			pos = line.find(';');
+			string city = line.substr(0, pos);
+			line.erase(0, pos + 1);
+
+			pos = line.find(':');
+			string mayor = line.substr(0, pos);
+			line.erase(0, pos + 1);
+
+			City tmpCi(city, mayor);
+
+			tmpCo.GetCities().push_back(tmpCi);
+		}
+
+		Countries.push_back(tmpCo);
+
 	}
+	file.close();
+}
+
+void writeToFile(string filepath, vector<Country>& Countries) {
+	ofstream file(filepath, 'w');
+
+	for_each(Countries.begin(), Countries.end(), [&file](Country counrty) {file << counrty << endl; });
+
+	file.close();
 }
 
 int main()
 {
 	string filepath = "text.txt";
-	fstream file(filepath);
 	vector<Country> Countries;
 
+	readFromFile(filepath, Countries);
+
+	for_each(Countries.begin(), Countries.end(), [](Country country) {cout << country << endl; });
+
+
+
+	writeToFile(filepath, Countries);
 
 
 	cout << "STL\nList of cities" << endl;
@@ -159,4 +239,5 @@ int main()
 			break;
 		}
 	}
+
 }
