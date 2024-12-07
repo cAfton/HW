@@ -92,7 +92,11 @@ void Delete(vector<string>) {
 }
 
 void readFromFile(fstream file, vector<Country> Countries) {
-
+	string line;
+	while (getline(file,line))
+	{
+		//line.
+	}
 }
 
 int main()
