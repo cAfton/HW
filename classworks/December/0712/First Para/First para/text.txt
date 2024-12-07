@@ -1,18 +1,5 @@
-County;president;city;mayor:city2;mayor2:city3;mayor3:
-County;president;city;mayor:city2;mayor2:city3;mayor3:
-County;president;city;mayor:city2;mayor2:city3;mayor3:
-County;president;city;mayor:city2;mayor2:city3;mayor3:
-County;president;city;mayor:city2;mayor2:city3;mayor3:
-County;president;city;mayor:city2;mayor2:city3;mayor3:
-United States;John Carter;New York;Emily Johnson:Los Angeles;Mark Robinson:
-;;
-United States;John Carter;New York;Emily Johnson:Los Angeles;Mark Robinson:
-France;Pierre Martin;Paris;Sophie Dupont:Marseille;Antoine Leclerc:
-Germany;Klaus Becker;Berlin;Thomas Schmitt:Munich;Anna Müller:
+France;Pierre Martin;Parice;Sophie Dupont:Marseille;Antoine Leclerc:
 Canada;Robert Hughes;Toronto;Sarah Lewis:Vancouver;Daniel White:
 Japan;Akira Tanaka;Tokyo;Haruto Saito:Osaka;Yumi Nakamura:
-Brazil;Lucas Oliveira;São Paulo;Camila Santos:Rio de Janeiro;Bruno Ferreira:
-Australia;William Parker;Sydney;Olivia Scott:Melbourne;Liam Harris:
-South Africa;Thabo Ndlovu;Johannesburg;Lebo Dlamini:Cape Town;Zanele Mokoena:
 India;Arjun Patel;Mumbai;Priya Sharma:Delhi;Raj Singh:
 Italy;Marco Rossi;Rome;Giulia Bianchi:Milan;Matteo Conti:
