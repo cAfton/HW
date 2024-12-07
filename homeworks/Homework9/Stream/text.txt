@@ -1,0 +1,52 @@
+10
+10
+Tech Solutions
+John Smith
+3652582633
+123 Tech Lane
+IT Services
+Green Energy Co
+Emma Wilson
+3652582634
+45 Solar St
+Renewable Energy
+Auto Galaxy
+Michael Brown
+3652582635
+78 Car Drive
+Automotive
+Health Plus
+Sophia Taylor
+3652582636
+22 Wellness Blvd
+Healthcare
+EduSmart
+Liam Johnson
+3652582637
+16 Learning Ave
+Education
+Foodies Delight
+Olivia Martinez
+3652582638
+89 Flavor Road
+Food and Beverage
+Pixel Art Studio
+Ethan Davis
+3652582639
+5 Design Way
+Graphic Design
+Home Builders Inc
+Isabella Moore
+3652582640
+12 Build Court
+Construction
+Travel Bliss
+James White
+3652582641
+34 Wander St
+Tourism
+Fashion Forward
+Ava Anderson
+3652582642
+67 Style Lane
+Fashion and Apparel
