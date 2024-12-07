@@ -1,6 +1,12 @@
 #pragma once
 #include "Company.h"
+#include <fstream>
+#include <string>
 
+string fileName = "data.txt";
+ofstream outFile;
+
+using namespace std;
 class Handbook
 {
 	Company* companies;
@@ -21,4 +27,10 @@ public:
 	Company findByNumber(long unsigned int num);
 	
 	Company findByActivity(string activity);
+
+
+	void saveToFile();
+
+
+	
 };

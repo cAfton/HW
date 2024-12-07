@@ -83,3 +83,16 @@ Company Handbook::findByActivity(string activity)
 		}
 	}
 }
+
+
+Company Handbook::saveToFile() {
+	outFile.open(fileName, ios::app);
+	if (!outFile) {
+		cout << "Error opening file!" << endl;
+		return;
+	}
+	for (int i = 0; i < lenght; i++)
+	{
+		outFile << companies[i].getCompanyName << '|' << companies[i].getDirector << '|' << companies[i].getNumber << '|' << companies[i].GetTypeOfActivity;
+	}
+}
