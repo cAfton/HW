@@ -86,7 +86,7 @@ Company Handbook::findByActivity(string activity)
 
 
 Company Handbook::saveToFile() {
-	outFile.open(fileName, ios::app);
+	File.open(fileName, ios::app);
 	if (!outFile) {
 		cout << "Error opening file!" << endl;
 		return;
@@ -95,4 +95,27 @@ Company Handbook::saveToFile() {
 	{
 		outFile << companies[i].getCompanyName << '|' << companies[i].getDirector << '|' << companies[i].getNumber << '|' << companies[i].GetTypeOfActivity;
 	}
+}
+
+
+Company Handbook::readFromFile() {
+	if (!File) {
+		std::cerr << "Error opening file!" << std::endl;
+		return;
+	}
+	string line;
+
+	while (getline(File, line)) {
+		istringstream lineStream(line);
+		string part1, part2, part3, part4, part5;
+
+		getline(lineStream, part1, '|');
+		getline(lineStream, part2, '|');
+		getline(lineStream, part3, '|');
+		getline(lineStream, part4, '|');
+		getline(lineStream, part5, '|');
+	}
+
+	Company tmp(part1, part2, part3, part4, part5);
+	this->addNew(tmp);
 }

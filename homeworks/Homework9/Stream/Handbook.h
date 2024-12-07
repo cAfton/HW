@@ -4,7 +4,7 @@
 #include <string>
 
 string fileName = "data.txt";
-ofstream outFile;
+fstream File;
 
 using namespace std;
 class Handbook
@@ -31,6 +31,6 @@ public:
 
 	void saveToFile();
 
-
+	void readFromFile();
 	
 };
