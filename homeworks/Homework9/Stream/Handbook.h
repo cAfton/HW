@@ -3,6 +3,10 @@
 #include <fstream>
 #include <string>
 
+string fileName = "data.txt";
+fstream File;
+
+using namespace std;
 class Handbook
 {
 	Company* companies;
@@ -27,4 +31,10 @@ public:
 	Company findByNumber(string num);
 	
 	Company findByActivity(string activity);
+
+
+	void saveToFile();
+
+	void readFromFile();
+	
 };
