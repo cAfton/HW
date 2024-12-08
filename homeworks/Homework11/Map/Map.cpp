@@ -1,11 +1,13 @@
 #include "Dictionary.h"
 
 string ReadFromFile(string& filepath) {
-	ifstream file(filepath);
+	fstream file(filepath);
 	string line;
-	getline(file, line);
 	if (file.is_open())
 		cout << "OK";
+
+	getline(file, line);
+	
 	file.close();
 	return line;
 }
@@ -31,7 +33,7 @@ int main()
 	
 	Dictionary dict2(ReadFromFile(filepath));
 
-	ofstream file(filepath, 'w');
+	ofstream file(filepath);
 
 	cout << dict2 << endl;
 
@@ -45,3 +47,13 @@ int main()
 	file << dict2;
 
 }
+
+
+
+//void writeToFile(string filepath, vector<Country>& Countries) {
+//	ofstream file(filepath, 'w');
+//
+//	for_each(Countries.begin(), Countries.end(), [&file](Country counrty) {file << counrty << endl; });
+//
+//	file.close();
+//}
