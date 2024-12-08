@@ -1,0 +1,5 @@
+France;Pierre Martin;Parice;Sophie Dupont:Marseille;Antoine Leclerc:
+Canada;Robert Hughes;Toronto;Sarah Lewis:Vancouver;Daniel White:
+Japan;Akira Tanaka;Tokyo;Haruto Saito:Osaka;Yumi Nakamura:
+India;Arjun Patel;Mumbai;Priya Sharma:Delhi;Raj Singh:
+Italy;Marco Rossi;Rome;Giulia Bianchi:Milan;Matteo Conti:
