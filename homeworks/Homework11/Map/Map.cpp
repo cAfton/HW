@@ -16,5 +16,24 @@ int main()
 	cout << endl;
 
 
+	string filepath = "text.txt";
+	fstream file(filepath);
+	string line;
+	getline(file, line);
+	Dictionary dict2(line);
+
+	if (file.is_open())
+		cout << "OK";
+
+	cout << dict2 << endl;
+
+	cout << endl;
+
+	cout << dict2.theMostUsedWord();
+
+	cout << endl;
+	cout << endl;
+
+	file << dict2;
 
 }
