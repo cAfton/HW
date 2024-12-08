@@ -47,13 +47,3 @@ int main()
 	file << dict2;
 
 }
-
-
-
-//void writeToFile(string filepath, vector<Country>& Countries) {
-//	ofstream file(filepath, 'w');
-//
-//	for_each(Countries.begin(), Countries.end(), [&file](Country counrty) {file << counrty << endl; });
-//
-//	file.close();
-//}
