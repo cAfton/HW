@@ -76,6 +76,9 @@ public:
 		return out;
 	}
 
+
+
+
     friend ofstream& operator<<(ofstream& out, const Dictionary& dict) {
         for_each(dict.dictionary.begin(), dict.dictionary.end(), [&out](pair <string, int> elem) {out << "\n\033[0m word: \033[32m" << elem.first << "\n\033[0m Repeated: \033[33m" << elem.second << endl; });
         cout << "\033[0m" << endl;

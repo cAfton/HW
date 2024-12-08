@@ -1,5 +1,16 @@
 #include "Dictionary.h"
 
+string ReadFromFile(string& filepath) {
+	ifstream file(filepath);
+	string line;
+	getline(file, line);
+	if (file.is_open())
+		cout << "OK";
+	file.close();
+	return line;
+}
+
+
 int main()
 {
 
@@ -17,13 +28,10 @@ int main()
 
 
 	string filepath = "text.txt";
-	fstream file(filepath);
-	string line;
-	getline(file, line);
-	Dictionary dict2(line);
+	
+	Dictionary dict2(ReadFromFile(filepath));
 
-	if (file.is_open())
-		cout << "OK";
+	ofstream file(filepath, 'w');
 
 	cout << dict2 << endl;
 
