@@ -3,6 +3,7 @@
 #include <map>
 #include <algorithm>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -74,4 +75,14 @@ public:
         cout << "\033[0m" << endl;
 		return out;
 	}
+
+
+
+
+    friend ofstream& operator<<(ofstream& out, const Dictionary& dict) {
+        for_each(dict.dictionary.begin(), dict.dictionary.end(), [&out](pair <string, int> elem) {out << "\nword: " << elem.first << "\n Repeated: " << elem.second << endl; });
+        cout << "" << endl;
+        return out;
+    }
+
 };
