@@ -3,6 +3,7 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
+#include <fstream>
 using namespace std;
 
 class Students
@@ -58,7 +59,13 @@ public:
 		return in;
 	}
 
-	~Students();
+	friend ofstream& operator<<(ofstream& file, Students& studenti) {
+		file << studenti.FirstName << ',' << studenti.LastName << ',' << studenti.ThirdName << ',' << studenti.Age << ',';
+		file << '[';
+		for_each(studenti.Marks.begin(), studenti.Marks.end(), [&file](int a) {file << a << ','; });
+		file << ']';
+		return file;
+	}
 
 };
 
@@ -144,7 +151,7 @@ public:
 
 	void DisplayAllStudents(ostream& out)
 	{
-		for_each(this->Studenti.begin(), this->Studenti.end(), [&out](Students misha) {out << misha << ", "; });
+		for_each(this->Studenti.begin(), this->Studenti.end(), [&out](Students& misha) {out << misha << ", "; });
 	}
 
 	friend ostream& operator<<(ostream& out, Group& group)
@@ -157,6 +164,42 @@ public:
 		return out;
 	}
 
+	void writeToFileStudenti(ofstream& file) {
+		file << '[';
+		for_each(this->Studenti.begin(), this->Studenti.end(), [&file](Students& misha) {file << misha << ';'; });
+		file << ']';
+	}
+
+	friend ofstream& operator<<(ofstream& file, Group& group) {
+		file << '[';
+		file << group.name << ',';
+		file << group.Teacher << ',';
+		group.writeToFileStudenti(file);
+		file << ',';
+		switch (group.CurrentSubject) //enum Subject { cpp, html, python, java, Csharp };
+		{
+		case cpp:
+			file << "cpp";
+			break;
+		case html:
+			file << "html";
+			break;
+		case python:
+			file << "python";
+			break;
+		case java:
+			file << "java";
+			break;
+		case Csharp:
+			file << "Csharp";
+			break;
+		default:
+			break;
+		}
+		file << ',';
+		file << group.Auditori << ';';
+		return file;
+	}
 
 };
 
@@ -169,6 +212,7 @@ private:
 	vector<int> Auditories;
 	vector<Group> Groups;
 public:
+
 	Academia(string name, string adress, string director, vector<Group> groups, vector<int> auditories) :Name(name),
 		Adress(adress), Director(director), Auditories(auditories), Groups(groups) {}
 
@@ -193,13 +237,115 @@ public:
 		this->Director = Director;
 	}
 
-	void DisplayAllStudents(ostream& out)
+    void DisplayAllGroups(ostream& out)
 	{
 		for_each(this->Groups.begin(), this->Groups.end(), [&out](Group elem) {out << elem << "\n\t"; });
 	}
 
-	void DisplayAcademia() {
-		cout << "Name: " << this->Name; cout << "\nAdress: " << this->Adress << "\nDirector: " << this->Director << "\nAuditories: " << this->Auditories << "\nGroups: " << 
+	void DisplayAllAuditories(ostream& out) {
+		for_each(this->Auditories.begin(), this->Auditories.end(), [&out](int elem) {out << elem << "; "; });
 	}
 
+	friend ostream& operator<<(ostream& out, Academia& auditories) {
+		out << "Name: " << auditories.Name; 
+		out << "\nAdress: " << auditories.Adress;
+		out << "\nDirector: " << auditories.Director;
+		out << "\nAuditories: "; auditories.DisplayAllAuditories(out);
+		out << "\nGroups: "; auditories.DisplayAllGroups(out);
+		return out;
+	}
+
+	void writeToFileAcademia(ofstream& file) {
+		file << '[';
+		for_each(this->Auditories.begin(), this->Auditories.end(), [&file](int elem) {file << elem << ','; });
+		file << ']';
+	}
+
+	friend ofstream& operator<<(ofstream& file, Academia& academia) {
+		file << academia.Name << ',' << academia.Adress << ',' << academia.Director << ',';
+		academia.writeToFileAcademia(file);
+		file << ',';
+		file << '[';
+		for_each(academia.Groups.begin(), academia.Groups.end(), [&file](Group elem) {file << elem << ';'; });
+		file << ']';
+		file << endl;
+		return file;
+	}
+
+	void reatFromFileAcademia(string& line) {
+		auto tmp = line.find(','); 
+		this->Auditories.push_back(stoi(line.substr(0, tmp)));
+		line.erase(0, tmp + 1);
+
+		auto Bracket = line.find(']');
+		auto Coma = line.find(',');
+
+
+	}
+
+	friend ifstream& operator>>(ifstream& file, Academia& academia) {
+		string line;
+		getline(file, line);
+		auto tmp = line.find(','); academia.Name = line.substr(0, tmp); line.erase(0, tmp + 1);
+		tmp = line.find(','); academia.Adress = line.substr(0, tmp); line.erase(0, tmp + 1);
+		tmp = line.find(','); academia.Director = line.substr(0, tmp); line.erase(0, tmp + 2);
+
+
+
+	}
+
+
 };
+
+
+
+int main() {
+	string filepath = "text.txt";
+	
+	Academia fromFile();
+
+	Students studenchiki("Olecsiy", "Autist", "Someone", 16);
+	Students studenchiki1("John", "Smith", "Michaelson", 20);
+	Students studenchiki2("Emily", "Johnson", "Edwardson", 19);
+	Students studenchiki3("Michael", "Brown", "Williamson", 22);
+	Students studenchiki4("Sophia", "Taylor", "Jameson", 21);
+	Students studenchiki5("Daniel", "Anderson", "Robertson", 23);
+	Students studenchiki6("Olivia", "Thomas", "Benjaminson", 18);
+	Students studenchiki7("Ethan", "Jackson", "Christopheron", 20);
+	Students studenchiki8("Isabella", "White", "Davidson", 19);
+	Students studenchiki9("Liam", "Harris", "Andrewson", 22);
+	Students studenchiki10("Emma", "Martin", "Charleson", 21);
+	Students studenchiki11("James", "Clark", "Anthonyson", 24);
+	Students studenchiki12("Mia", "Lewis", "Jonathanson", 18);
+	Students studenchiki13("Alexander", "Walker", "Harrisonson", 23);
+	Students studenchiki14("Charlotte", "Hall", "Eliason", 20);
+	Students studenchiki15("Benjamin", "Allen", "Matthewson", 21);
+	Students studenchiki16("Amelia", "Young", "Samuelson", 19);
+	Students studenchiki17("Lucas", "King", "Nicholson", 22);
+	Students studenchiki18("Grace", "Scott", "Jeffersonson", 20);
+	Students studenchiki19("Henry", "Green", "Jacksonson", 23);
+	Students studenchiki20("Ava", "Baker", "Franklinson", 18);
+
+	vector<Students> Studenchikies{ studenchiki ,studenchiki1,studenchiki2,studenchiki3};
+
+
+	Group P34("p34", "Ura", Studenchikies, cpp, 213);
+	Group P1881("p35", "Did", Studenchikies, cpp, 215);
+
+	vector<Group> G{ P34 , P1881 };
+
+	vector<int> N{ 213,234,325,142 };
+
+	Academia step("Ww", "WwW", "someone", G, N);
+
+	cout << step;
+	
+
+	
+	ofstream file(filepath);
+	file << step;
+
+}
+
+
+//Academia1,Adress,Director,[125,314,],[name,Teacher,[name,lastname,thirdName,age,[1,2,3,];name2,lastname2,thirdName2,age2,[1,2,3,];],cpp,314;name1,T2,[],cpp,125;]
