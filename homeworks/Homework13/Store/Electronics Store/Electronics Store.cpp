@@ -36,8 +36,8 @@ public:
             return false;
     }
 
-    friend ostream& operator<<(ostream out, Goods copy) {
-        out << "Name: " << copy.Name << "\nCategory: " << copy.Category << "\nPrice: " << copy.Price << "\nQuantity in stock: " << copy.QuantityInStock;
+    friend ostream& operator<<(ostream& out, Goods copy) {
+        out << "Name: " << copy.Name << "\nCategory: " << copy.Category << "\nPrice: " << copy.Price << "\nQuantity in stock: " << copy.QuantityInStock << endl;
         return out;
     }
 };
@@ -67,6 +67,7 @@ public:
         out << "Name: " << copy.Name;
         out << "\nGoods: ";
         for_each(copy.goods.begin(), copy.goods.end(), [&out](Goods& elem) {out << elem; });
+        return out;
     }
 };
 
@@ -77,8 +78,14 @@ int main()
     Goods phone2("IPhone2", "Phone2", 1500, 110);
     vector<Goods> goods{ phone, phone2 };
     Store Apple("Apple", goods);
-    
+    cout << Apple;
+    string a = "IPhone";
 
+    Apple.ChangePrice(a, 1300);
 
-    Apple.ChangePrice("IPhone", 1300);
+    cout << "\n\n\n" << Apple;
+
+    Apple.ChangeQuantityInStock(a, 50);
+
+    cout << "\n\n\n" << Apple;
 }
