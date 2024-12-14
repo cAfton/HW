@@ -166,7 +166,7 @@ public:
 
 	void writeToFileStudenti(ofstream& file) {
 		file << '[';
-		for_each(this->Studenti.begin(), this->Studenti.end(), [&file](Students& misha) {file << misha << ';'; });
+		for_each(this->Studenti.begin(), this->Studenti.end(), [&file](Students& misha) {file << misha << ':'; });
 		file << ']';
 	}
 
@@ -197,8 +197,34 @@ public:
 			break;
 		}
 		file << ',';
-		file << group.Auditori << ';';
+		file << group.Auditori;
 		return file;
+	}
+
+	void reatFromFileGroup(string& line) {
+		string tmp;
+
+		auto Bracket = line.find(']');
+		auto Coma = line.find(':');
+
+		while (Bracket < Coma) {
+			tmp = line.substr(0, Coma + 1);
+			//Student << 
+			line.erase(0, Coma + 1);
+		}
+		line.erase(0, Bracket + 3);
+
+	}
+
+	friend ifstream& operator>>(string& line, Group& group) {
+
+		auto tmp = line.find(','); group.name = line.substr(0, tmp); line.erase(0, tmp + 1);
+		tmp = line.find(','); group.Teacher = line.substr(0, tmp); line.erase(0, tmp + 2);
+
+		group.reatFromFileGroup(line);
+
+
+
 	}
 
 };
@@ -265,7 +291,6 @@ public:
 		file << academia.Name << ',' << academia.Adress << ',' << academia.Director << ',';
 		academia.writeToFileAcademia(file);
 		file << ',';
-		file << '[';
 		for_each(academia.Groups.begin(), academia.Groups.end(), [&file](Group elem) {file << elem << ';'; });
 		file << ']';
 		file << endl;
@@ -280,6 +305,14 @@ public:
 		auto Bracket = line.find(']');
 		auto Coma = line.find(',');
 
+		while (Bracket > Coma) {
+			tmp = line.find(',');
+			this->Auditories.push_back(stoi(line.substr(0, tmp)));
+			line.erase(0, tmp + 1);
+			Coma = line.find(',');
+		}
+		line.erase(0, Bracket + 3);
+
 
 	}
 
@@ -289,7 +322,7 @@ public:
 		auto tmp = line.find(','); academia.Name = line.substr(0, tmp); line.erase(0, tmp + 1);
 		tmp = line.find(','); academia.Adress = line.substr(0, tmp); line.erase(0, tmp + 1);
 		tmp = line.find(','); academia.Director = line.substr(0, tmp); line.erase(0, tmp + 2);
-
+		academia.reatFromFileAcademia(line);
 
 
 	}
@@ -302,7 +335,7 @@ public:
 int main() {
 	string filepath = "text.txt";
 	
-	Academia fromFile();
+	//Academia fromFile();
 
 	Students studenchiki("Olecsiy", "Autist", "Someone", 16);
 	Students studenchiki1("John", "Smith", "Michaelson", 20);
