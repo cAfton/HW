@@ -67,13 +67,18 @@ enum Subject { cpp, html, python, java, Csharp };
 class Group
 {
 private:
+	string name;
 	string Teacher;
 	vector<Students> Studenti;
 	Subject CurrentSubject;
 	int Auditori;
 public:
-	Group(string teacher, vector<Students> studenti, Subject currentSubject, int auditori) : Teacher(teacher),
-		Studenti(studenti), CurrentSubject(currentSubject), Auditori(auditori) {};
+	Group(string name, string teacher, vector<Students> studenti, Subject currentSubject, int auditori) : Teacher(teacher),
+		Studenti(studenti), CurrentSubject(currentSubject), Auditori(auditori), name(name) {};
+
+	string GetName() const {
+		return this->name;
+	}
 
 	void AddStudent(Students a)
 	{
@@ -158,10 +163,43 @@ public:
 class Academia
 {
 private:
-	string name;
+	string Name;
 	string Adress;
 	string Director;
 	vector<int> Auditories;
+	vector<Group> Groups;
 public:
+	Academia(string name, string adress, string director, vector<Group> groups, vector<int> auditories) :Name(name),
+		Adress(adress), Director(director), Auditories(auditories), Groups(groups) {}
+
+	void AddNewGroup(string name, string teacher, vector<Students> studenti, Subject currentSubject, int auditori) {
+		Group tmp(name, teacher, studenti, currentSubject, auditori);
+		this->Groups.push_back(tmp);
+	}
+	void AddGroup(Group tmp) {
+		Groups.push_back(tmp);
+	}
+
+	void DeleteStudent(string Name)
+	{
+		Groups.erase(remove_if(Groups.begin(), Groups.end(), [&Name](const Group& Group) {return Group.GetName() == Name; }), Groups.end());
+	}
+
+	void ReplaceDirector()
+	{
+		string Director;
+		cout << "What director you want to replace? ";
+		cin >> Director;
+		this->Director = Director;
+	}
+
+	void DisplayAllStudents(ostream& out)
+	{
+		for_each(this->Groups.begin(), this->Groups.end(), [&out](Group elem) {out << elem << "\n\t"; });
+	}
+
+	void DisplayAcademia() {
+		cout << "Name: " << this->Name; cout << "\nAdress: " << this->Adress << "\nDirector: " << this->Director << "\nAuditories: " << this->Auditories << "\nGroups: " << 
+	}
 
 };
