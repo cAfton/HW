@@ -71,7 +71,6 @@ public:
     }
 };
 
-
 int main()
 {
     Goods phone("IPhone", "Phone", 500, 10);
