@@ -63,6 +63,14 @@ public:
         }});
     }
 
+    void addNewGood(Goods good) {
+        this->goods.push_back(good);
+    }
+
+    void deleteGoods(string name) {
+        this->goods.erase(remove_if(goods.begin(), goods.end(), [&name](Goods& g) {return g.getName() == name; }), goods.end());
+    }
+
     friend ostream& operator<<(ostream& out, Store& copy) {
         out << "Name: " << copy.Name;
         out << "\nGoods: ";
