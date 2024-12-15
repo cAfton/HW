@@ -32,10 +32,22 @@ public:
             return;
         }
     }
-
+    string getName() {
+        return this->Name;
+    }
     string getSurname() const {
         return this->Surname;
     }
+    string getFather() {
+        return this->Father;
+    }
+    int getAge() {
+        return this->Age;
+    }
+    vector<int>& getMarks(){
+        return this->Marks;
+    }
+
 
     void deleteMark(int index) {
         this->Marks.erase(Marks.begin() + index);
@@ -79,6 +91,16 @@ public:
 
     Group(){}
 
+    string getTeacher() {
+        return this->Teacher;
+    }
+    Subject getSubjectInLearning() {
+        return this->SubjectInLearning;
+    }
+    int getAuditorium() {
+        return this->Auditorium;
+    }
+
     void addStudent(Student newStudent) {
         this->Students.push_back(newStudent);
     }
@@ -87,7 +109,7 @@ public:
          Students.erase(remove_if(Students.begin(), Students.end(), [&Surname](const Student& student) {return student.getSurname() == Surname; }), Students.end());
     }
 
-    vector<Student> getStudents() {
+    vector<Student>& getStudents() {
         return this->Students;
     }
 
@@ -102,6 +124,7 @@ public:
         cout << "Chose subject: " << endl;
         cout << "1. CPP\n2. CSh\n3. Python\n4. CSS\n5. Unity\n6. Java\n\n";
         int userChose;
+        cin >> userChose;
         switch (userChose)
         {
         case 1:
@@ -173,6 +196,7 @@ public:
         cout << "\n\nChose subject: " << endl;
         cout << "1. CPP\n2. CSh\n3. Python\n4. CSS\n5. Unity\n6. Java\n\n";
         int userChose;
+        cin >> userChose;
         switch (userChose)
         {
         case 1:
@@ -251,42 +275,51 @@ public:
             {
                 itStdEnd = find(itStrBegin, auds.end(), ',');
                 int newAud = stoi(string(itStrBegin, itStdEnd));
+                this->Auditoriumes.push_back(newAud);
                 itStrBegin = itStdEnd + 1;
             }
 
-            itEnd = find(itBegin, line.end(), ']');
-            string nameS, surname, father;
-            int age, auditorium, subject;
-            string nameG, teacher;
-            int isGroup = 0;
-            while (itEnd != line.end())//group
-            {
-                itBegin = itEnd;
-                itBegin++;
-                itEnd = find(itBegin, line.end(), ';');//Group name
-                nameG = string(itBegin, itEnd);
+            auto itGroupsStart = find(line.begin(), line.end(), '<');
+            auto itGroupsEnd = find(line.begin(), line.end(), '>');
+            string groups = string(itGroupsStart, itGroupsEnd);
+            //cout << groups << endl;
+            itBegin = groups.begin();
+            auto itEndAll = groups.begin();
 
-                itBegin = itEnd;
-                itBegin++;
-                itEnd = find(itBegin, line.end(), ';');//teacher
-                teacher = string(itBegin, itEnd);
 
-                itBegin = itEnd;
-                itBegin++;
-                itEnd = find(itBegin, line.end(), ';');//Subject
-                subject = stoi(string(itBegin, itEnd));
+            while (itEndAll != groups.end() - 1) {
+                itBegin = itEndAll + 1;
 
-                itBegin = itEnd;
-                itBegin++;
-                itEnd = find(itBegin, line.end(), '{');//auditorium
-                auditorium = stoi(string(itBegin, itEnd));
-                if (this->isInAuds(auditorium))
+                auto itBeginGroup = find(itBegin, groups.end(), '[');
+                auto itEndGroup = find(itBegin, groups.end(), ']');
+                string group = string(itBeginGroup + 1, itEndGroup);
+                //cout << group << endl;
+                itEndAll = itEndGroup;
+
+
+                auto itVarBegin = group.begin();
+                auto itVarEnd = find(itVarBegin, group.end(), ';');
+                string saveNameGroup = string(itVarBegin, itVarEnd);
+                
+                itVarBegin = itVarEnd + 1;
+                itVarEnd = find(itVarBegin, group.end(), ';');
+                string saveTeacherGroup = string(itVarBegin, itVarEnd);
+                
+                itVarBegin = itVarEnd + 1;
+                itVarEnd = find(itVarBegin, group.end(), ';');
+                int saveSubjectGroup = stoi(string(itVarBegin, itVarEnd));
+                
+                itVarBegin = itVarEnd + 1;
+                itVarEnd = find(itVarBegin, group.end(), '{');
+                int saveAuditGroup = stoi(string(itVarBegin, itVarEnd));
+                if (!this->isInAuds(saveAuditGroup))
                 {
-                    this->Auditoriumes.push_back(auditorium);
+                    throw invalid_argument("");
                 }
+                
 
                 Subject sub;
-                switch (subject)
+                switch (saveSubjectGroup)
                 {
                 case 1:
                     sub = CPP;
@@ -308,71 +341,96 @@ public:
                     break;
                 }
 
-                Group newGroup(nameG, teacher, sub, auditorium);
+                Group newGroup(saveNameGroup, saveTeacherGroup, sub, saveAuditGroup);
 
+                auto itBeginStudents = find(itBegin, groups.end(), '{');
+                auto itEndStudents = find(itBegin, groups.end(), '}');
 
-                auto itEndOFStudents = find(itBegin, line.end(), '}');
-                int isStudent = 0;
-                //auto itGroupes = find();//line with groupes as in mark and students
-                while (itEnd + 1 != itEndOFStudents)//students
-                {
-                    itBegin = itEnd;
-                    itBegin++;
-                    itEnd = find(itBegin, line.end(), ';');//name
-                    nameS = string(itBegin, itEnd);
+                string students = string(itBeginStudents, itEndStudents);
+                //cout << students << endl;
+                auto itEndStudent = group.begin();
+                auto itStudentsEnd = students.begin();
+                while (itStudentsEnd != students.end() - 1) {
+                    itBegin = itStudentsEnd + 1; 
+                    itStudentsEnd = find(itBegin, students.end(), ')');
+                    string student = string(itBegin, itStudentsEnd + 1);
+                    //cout << "--- " << student << endl;
 
-                    itBegin = itEnd;
-                    itBegin++;
-                    itEnd = find(itBegin, line.end(), ';');//surname
-                    surname = string(itBegin, itEnd);
+                    itVarBegin = student.begin();
+                    itVarEnd = find(student.begin(), student.end(), ';');
+                    string saveName = string(itVarBegin, itVarEnd);
 
-                    itBegin = itEnd;
-                    itBegin++;
-                    itEnd = find(itBegin, line.end(), ';');//father
-                    father = string(itBegin, itEnd);
+                    itVarBegin = itVarEnd + 1;
+                    itVarEnd = find(itVarBegin, student.end(), ';');
+                    string saveSurname = string(itVarBegin, itVarEnd);
 
-                    itBegin = itEnd;
-                    itBegin++;
-                    itEnd = find(itBegin, line.end(), '(');//age
-                    age = stoi(string(itBegin, itEnd));
+                    itVarBegin = itVarEnd + 1;
+                    itVarEnd = find(itVarBegin, student.end(), ';');
+                    string saveFather = string(itVarBegin, itVarEnd);
 
-                    Student student(nameS, surname, father, age);
-                    itBegin = itEnd + 1;
-                    newGroup.addStudent(student);
-                    auto itEndOFMarks = find(itBegin, line.end(), ')');
-                   
+                    itVarBegin = itVarEnd + 1;
+                    itVarEnd = find(itVarBegin, student.end(), '(');
+                    int saveAge = stoi(string(itVarBegin, itVarEnd));
 
-                    string marks = string(itBegin, itEndOFMarks);
-                    auto itMarksBegin = marks.begin();
-                    auto itMarksEnd = marks.end();
+                    Student newStudent(saveName, saveSurname, saveFather, saveAge);
 
-                    while (itMarksBegin != marks.end())
-                    {
-                        itMarksEnd = find(itMarksBegin, marks.end(), ',');
-                        int newMark = stoi(string(itMarksBegin, itMarksEnd));
-                        isGroup;
-                        isStudent;
-                        newGroup.getStudents()[isStudent].addMark(newMark);
-                        itMarksBegin = itMarksEnd + 1;
+                    auto itMarksBegin = itVarEnd;
+                    auto itMarksEnd = find(student.begin(), student.end(), ')');
+                    itBegin = itMarksEnd + 1;
+                    string marks = string(itMarksBegin, itMarksEnd);
+                    itMarksEnd = marks.begin();
+                    itVarEnd = marks.begin();
+                    while (itVarEnd != marks.end() - 1) {
+                        itVarBegin = itVarEnd + 1;
+                        itVarEnd = find(itVarBegin, marks.end(), ',');
+                        int saveMark = stoi(string(itVarBegin, itVarEnd));
+                        newStudent.addMark(saveMark);
                     }
 
-                    itEnd = find(itBegin, line.end(), ')');
-                    isStudent++;
-
+                    newGroup.addStudent(newStudent);
                 }
                 this->Groupes.push_back(newGroup);
-                isGroup++;
+                
             }
-
 
         }
     }
 
-
     Academy(){}
+
+    void save(string path) {
+        ofstream file;
+        file.open(path, 'w');
+        if (file.is_open())
+        {
+            string line;
+            line = this->Name + ";" + this->Adress + ";" + this->Director + "[";
+            for_each(this->Auditoriumes.begin(), this->Auditoriumes.end(), [&line](int num) {line += to_string(num) + ","; });
+            line += "]<";
+            for_each(this->Groupes.begin(), this->Groupes.end(), [&line](Group& group) {
+                line += "[" + group.getName() + ";" + group.getTeacher() + ";" + to_string(group.getSubjectInLearning()) + ";" + to_string(group.getAuditorium()) + "{";
+                for_each(group.getStudents().begin(), group.getStudents().end(), [&line](Student& student) {
+                    
+                    line += student.getName() + ";" + student.getSurname() + ";" + student.getFather() + ";" + to_string(student.getAge()) + "(";
+                    for_each(student.getMarks().begin(), student.getMarks().end(), [&line](int mark) {
+                        line += to_string(mark) + ",";
+                        });
+                    line += ")";
+                    });
+                line += "}]";
+                });
+            line += ">";
+
+            file << line;
+        }
+    }
 
     void addGroup(Group newGroup) {
         this->Groupes.push_back(newGroup);
+    }
+
+    vector<Group>& getGroupes(){
+        return this->Groupes;
     }
 
     void deleteGroup(string groupName) {
@@ -385,6 +443,10 @@ public:
 
     void printAllGroups() const {
         for_each(this->Groupes.begin(), this->Groupes.end(), [](Group group) {cout << group << endl; });
+    }
+
+    void printOnlyGroupName() {
+        for_each(this->Groupes.begin(), this->Groupes.end(), [](Group group) {cout << group.getName() << endl; });
     }
 
     friend ostream& operator<<(ostream& out, Academy& academy) {
@@ -413,25 +475,221 @@ public:
 
 int main()
 {
-    /*Academy ITStep("IT Step", "vulitsa", "Director1", 425);
-    Group p34("p34", "Yura", CPP, 312);
-    Group p35("p35", "TeacherXZ", CSh, 417);
-    Group p36("p36", "Teacher1", Python, 210);
-    Student student1("Name1", "Surname1", "Father1", 16);
-    Student student2("Name2", "Surname2", "Father2", 17);
-    Student student3("Name3", "Surname3", "Father3", 14);
-
-    Student student4("Name4", "Surname4", "Father4", 18);
-    Student student5("Name5", "Surname5", "Father5", 14);
-    Student student6("Name6", "Surname6", "Father6", 16);
-
-    Student student7("Name7", "Surname7", "Father7", 17);
-    Student student8("Name8", "Surname8", "Father8", 16);
-    Student student9("Name9", "Surname9", "Father9", 15);*/
 
     Academy ITStep("text.txt");
+    int userChoise;
 
-    cout << ITStep << endl;
+    do
+    {
+        system("cls");
+        cout << "|1 - add new group         |" << endl;
+        cout << "|2 - add new student       |" << endl;
+        cout << "|3 - delete group          |" << endl;
+        cout << "|4 - delete student        |" << endl;
+        cout << "|5 - view academy          |" << endl;
+        cout << "|6 - view groups           |" << endl;
+        cout << "|7 - view students         |" << endl;
+        cout << "|8 - add mark              |" << endl;
+        cout << "|9 - delete mark           |" << endl;
+        cout << "|10 - add age              |" << endl;
+        cout << "|11 - change teacher       |" << endl;
+        cout << "|12 - change subject       |" << endl;
+        cout << "|13 - change auditorium    |" << endl;
+        cout << "|14 - change director      |" << endl;
+        cout << "|15 - save                 |" << endl;
+        cout << "\n|0 - exit                  |" << endl;
+        cin >> userChoise;
+        string userCh, studentName;
+        system("cls");
+        switch (userChoise)
+        {
+        case 1: {
 
+            Group group;
+            cin >> group;
+            ITStep.addGroup(group);
+            break;
+        }
+        case 2: {
+            ITStep.printOnlyGroupName();
+            cout << "print group will be added: ";
+            cin >> userCh;
+            Student newStudent("", "", "", 1);
+            cin >> newStudent;
+
+           for_each(ITStep.getGroupes().begin(), ITStep.getGroupes().end(), [&userCh, newStudent](Group& group) {
+               if (userCh == group.getName())
+               {
+                   group.addStudent(newStudent);
+               }
+               });
+                
+            
+            break;
+        }
+        case 3: {
+            ITStep.printOnlyGroupName();
+            cout << "\n\nwrite name to delete: ";
+            cin >> userCh;
+            ITStep.deleteGroup(userCh);
+            break;
+        }
+        case 4: {
+            cout << "Enter group name: ";
+            cin >> userCh;
+            cout << "Enter student surname to delete: ";
+            cin >> studentName;
+
+            for_each(ITStep.getGroupes().begin(), ITStep.getGroupes().end(), [userCh, studentName](Group& group) {
+                if (group.getName() == userCh) {
+                    group.deleteStudent(studentName);
+                }
+                });
+            break;
+        }
+        case 5: {
+            cout << ITStep << endl;
+            system("pause");
+            break;
+        }
+        case 6: {
+            ITStep.printAllGroups();
+            system("pause");
+            break;
+        }
+        case 7: {
+            for_each(ITStep.getGroupes().begin(), ITStep.getGroupes().end(), [](Group group) {cout << group << endl; });
+            system("pause");
+            break;
+        }
+        case 8: {
+            int mark;
+            cout << "Enter group name: ";
+            cin >> userCh;
+            cout << "Enter student surname: ";
+            cin >> studentName;
+            cout << "Enter mark to add: ";
+            cin >> mark;
+
+            for_each(ITStep.getGroupes().begin(), ITStep.getGroupes().end(), [userCh, studentName, mark](Group& group) {
+                if (group.getName() == userCh) {
+                    for_each(group.getStudents().begin(), group.getStudents().end(), [userCh, studentName, mark](Student& student) {
+                        if (student.getSurname() == studentName) {
+                            student.addMark(mark);
+                        }
+                        });
+                }
+                });
+            break;
+        }
+        case 9: {
+            int mark;
+            cout << "Enter group name: ";
+            cin >> userCh;
+            cout << "Enter student surname: ";
+            cin >> studentName;
+            for_each(ITStep.getGroupes().begin(), ITStep.getGroupes().end(), [userCh, studentName, mark](Group& group) {
+                if (group.getName() == userCh) {
+                    for_each(group.getStudents().begin(), group.getStudents().end(), [userCh, studentName, mark](Student& student) {
+                        if (student.getSurname() == studentName) {
+                            for_each(student.getMarks().begin(), student.getMarks().begin(), [](int m) {cout << m << endl; });
+                        }
+                        });
+                }
+                });
+
+            cout << "Enter mark to delete: ";
+            cin >> mark;
+
+            for_each(ITStep.getGroupes().begin(), ITStep.getGroupes().end(), [userCh, studentName, mark](Group& group) {
+                if (group.getName() == userCh) {
+                    for_each(group.getStudents().begin(), group.getStudents().end(), [userCh, studentName, mark](Student student) {
+                        if (student.getName() == studentName) {
+                            student.deleteMark(mark);
+                        }
+                        });
+                }
+                });
+            break;
+        }
+        case 10: {
+            int age;
+            cout << "Enter group name: ";
+            cin >> userCh;
+            cout << "Enter student surname: ";
+            cin >> studentName;
+
+            for_each(ITStep.getGroupes().begin(), ITStep.getGroupes().end(), [userCh, studentName](Group& group) {
+                if (group.getName() == userCh) {
+                    for_each(group.getStudents().begin(), group.getStudents().end(), [userCh, studentName](Student student) {
+                        if (student.getSurname() == studentName) {
+                            student.newYear();
+                        }
+                        });
+                }
+                });
+            break;
+        }
+        case 11: {
+            cout << "Enter group name: ";
+            cin >> userCh;
+            cout << "Enter new teacher's name: ";
+            string newTeacher;
+            cin >> newTeacher;
+
+            for_each(ITStep.getGroupes().begin(), ITStep.getGroupes().end(), [userCh, newTeacher](Group group) {
+                if (group.getName() == userCh) {
+                    group.changeTeacher(newTeacher);
+                }
+                });
+            break;
+        }
+        case 12: {
+            cout << "Enter group name: ";
+            cin >> userCh;
+
+            for_each(ITStep.getGroupes().begin(), ITStep.getGroupes().end(), [userCh](Group group) {
+                if (group.getName() == userCh) {
+                    group.changeSubject();
+                }
+                });
+            break;
+        }
+        case 13: {
+            cout << "Enter group name: ";
+            cin >> userCh;
+            int auditor;
+            do
+            {
+                cout << "Enter correct new auditorium: ";
+                cin >> auditor;
+            } while (!ITStep.isInAuds(auditor));
+
+
+            for_each(ITStep.getGroupes().begin(), ITStep.getGroupes().end(), [userCh, auditor](Group group) {
+                if (group.getName() == userCh) {
+                    group.changeAuditorium(auditor);
+                }
+                });
+            break;
+        }
+        case 14: {
+            cout << "print new director: ";
+            cin >> userCh;
+            ITStep.changeDirector(userCh);
+            break;
+        }
+        case 15: {
+            ITStep.save("text.txt");
+            break;
+        }
+        case 0: {
+            ITStep.save("text.txt");
+            break;
+        }
+        default:
+            break;
+        }
+    } while (userChoise != 0);
 
 }
